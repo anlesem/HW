@@ -1,0 +1,5 @@
+.root {
+	min-height: 100%;
+	display: grid;
+	grid-template-rows: 100px 1fr 100px;
+}
