@@ -3,3 +3,62 @@
 	display: grid;
 	grid-template-rows: 100px 1fr 100px;
 }
+
+.form {
+	display: flex;
+	flex-direction: column;
+	width: 400px;
+	margin-top: 40px;
+
+	&_author {
+		border: 1px solid #000;
+		border-radius: 3px;
+		padding: 7px 25px;
+	}
+
+	&_text {
+		min-height: 200px;
+		margin-top: 20px;
+		border: 1px solid #000;
+		border-radius: 3px;
+		padding: 7px 25px;
+	}
+
+	&_button {
+		margin-top: 20px;
+		border: 1px solid #000;
+		border-radius: 3px;
+		padding: 7px 25px;
+		background-color: #ddd;
+	}
+}
+
+.messageList {
+	margin-top: 40px;
+	padding-left: 20px;
+	font-size: 20px;
+	font-weight: semibold;
+}
+
+.message {
+	margin-top: 20px;
+	padding: 10px 20px;
+
+	font-size: 14px;
+	font-weight: normal;
+	border-bottom: 1px solid #000;
+
+	&_text {
+		font-size: 16px;
+	}
+
+	&_author {
+		margin-top: 20px;
+		text-align: right;
+	}
+
+	p:last-child {
+		margin-top: 20px;
+		text-align: right;
+	}
+}
