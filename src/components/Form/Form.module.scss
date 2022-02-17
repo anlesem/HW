@@ -1,0 +1,28 @@
+.form {
+   display: flex;
+   flex-direction: column;
+   width: 400px;
+   margin-top: 40px;
+
+   &_author {
+      border: 1px solid #000;
+      border-radius: 3px;
+      padding: 7px 25px;
+   }
+
+   &_text {
+      min-height: 200px;
+      margin-top: 20px;
+      border: 1px solid #000;
+      border-radius: 3px;
+      padding: 7px 25px;
+   }
+
+   &_button {
+      margin-top: 20px;
+      border: 1px solid #000;
+      border-radius: 3px;
+      padding: 7px 25px;
+      background-color: #ddd;
+   }
+}
