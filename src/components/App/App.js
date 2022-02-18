@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { nanoid } from 'nanoid';
 
 import style from './App.module.scss';
 
@@ -13,21 +14,22 @@ function App() {
 	const [messages, setMessages] = useState([]);
 	// const robotRef = useRef(null);
 
-	// text, event для разнообразия
+	// text, event для разнообразия, но лучше не использовать
 	const sendMassage = (text, event) => {
 		if (event.target.elements.author.value || event.target.elements.text.value) {
 			setMessages([...messages, {
+				id: nanoid(),
 				author: text,
 				text: event.target.elements.text.value,
 			}]);
-			event.target.elements.author.value = '';
+			// Так делать плохо. Необходимо очищать через setState
 			event.target.elements.text.value = '';
 		}
-		// вызов console.log(messages);	не работает
+		// console.log(messages);	// вернёт старое значение
 	}
 
 	useEffect(() => {
-		// вызов console.log(messages);	работает
+		// console.log(messages);	// вернёт новое значение
 	}, [messages]);
 
 
@@ -36,7 +38,6 @@ function App() {
 			<Header />
 			<main className="container">
 				{/* <Message content={'Все задания выполнены'} /> */}
-
 				<Form addMessage={sendMassage} />
 				<MessageList message={messages} />
 			</main>
