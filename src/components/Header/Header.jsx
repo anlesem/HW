@@ -1,11 +1,11 @@
 import style from './Header.module.scss';
 
-export const Header = () => {
+export const Header = (props) => {
 
 	return (
 		<header className={style.header}>
 			<div className={style.header__wrap + ' container'}>
-				<h1>Урок 2</h1>
+				<h1>{props.lesson}</h1>
 			</div>
 		</header>
 	);

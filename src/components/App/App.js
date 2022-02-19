@@ -7,39 +7,47 @@ import { Header } from '../Header/Header';
 // import { Message } from '../Message/Message';
 import { MessageList } from '../MessageList/MessageList';
 import { Form } from '../Form/Form';
+import { Chats } from '../Chats/Chats';
 import { Footer } from '../Footer/Footer';
 
 
 function App() {
+	const lesson = 'Урок 3';
 	const [messages, setMessages] = useState([]);
-	// const robotRef = useRef(null);
 
-	// text, event для разнообразия, но лучше не использовать
-	const sendMassage = (text, event) => {
-		if (event.target.elements.author.value || event.target.elements.text.value) {
-			setMessages([...messages, {
+	const sendMassage = (author, text) => {
+		if (author || text) {
+			setMessages((prevMessages) => [...prevMessages, {
 				id: nanoid(),
-				author: text,
-				text: event.target.elements.text.value,
+				author: author,
+				text: text,
 			}]);
-			// Так делать плохо. Необходимо очищать через setState
-			event.target.elements.text.value = '';
 		}
-		// console.log(messages);	// вернёт старое значение
 	}
 
 	useEffect(() => {
-		// console.log(messages);	// вернёт новое значение
+		if (messages.length && messages[messages.length - 1].author !== 'BOT') {
+			const timeout = setTimeout(
+				() =>
+					sendMassage('BOT', 'Im BOT'),
+				1000
+			);
+
+			return () => {
+				clearTimeout(timeout);
+			};
+		}
 	}, [messages]);
 
 
 	return (
 		<div className={style.root}>
-			<Header />
-			<main className="container">
+			<Header lesson={lesson} />
+			<main className={style.main + " container"}>
 				{/* <Message content={'Все задания выполнены'} /> */}
 				<Form addMessage={sendMassage} />
 				<MessageList message={messages} />
+				<Chats message={messages} />
 			</main>
 			<Footer />
 		</div>
