@@ -17,7 +17,7 @@ export const Chats = (props) => {
    return (
       <div className={style.chats}>Чаты:
          <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-            {users.map((item) => (
+            {users.map((item, idx) => (
                <ListItem
                   key={item.id}
                   disableGutters
@@ -27,7 +27,7 @@ export const Chats = (props) => {
                      </IconButton>
                   }
                >
-                  <ListItemText primary={`Пользователь ${item.author}`} />
+                  <ListItemText primary={`Пользователь ${item.author}`} data-testid={'chat-item-' + idx} />
                </ListItem>
             ))}
          </List>
