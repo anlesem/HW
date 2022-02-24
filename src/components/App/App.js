@@ -12,7 +12,7 @@ import { Footer } from '../Footer/Footer';
 
 
 function App() {
-	const lesson = 'Урок 3';
+	const lesson = 'Урок 10';
 	const [messages, setMessages] = useState([]);
 
 	const sendMassage = (author, text) => {

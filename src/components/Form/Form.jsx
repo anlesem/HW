@@ -10,7 +10,6 @@ export const Form = ({ addMessage }) => {
    const myRef = useRef(null);
    const handleSubmit = (event) => {
       event.preventDefault();
-      // text, event для разнообразия, но лучше не использовать
       addMessage(author, text);
       setAuthor('');
       setText('');
@@ -22,9 +21,9 @@ export const Form = ({ addMessage }) => {
 
    return (
       <form className={style.form} onSubmit={handleSubmit}>
-         <TextField id="outlined-required" name="author" label="ФИО. Обязательно" variant="outlined" value={author} onChange={event => setAuthor(event.target.value)} inputRef={myRef} required />
+         <TextField id="outlined-required" name="author" label="ФИО. Обязательно" variant="outlined" value={author} onChange={event => setAuthor(event.target.value)} inputRef={myRef} required inputProps={{ "data-testid": "form-inputAuthor" }} />
          <TextField id="outlined-multiline-static" name="text" label="Текст сообщения" sx={{ mt: 2 }} multiline rows={4} value={text} onChange={event => setText(event.target.value)} />
-         <Button variant="outlined" type="submit" sx={{ mt: 2 }}>Отправить</Button>
+         <Button variant="outlined" type="submit" sx={{ mt: 2 }} data-testid='form-button'>Отправить</Button>
       </form>
    );
 }
