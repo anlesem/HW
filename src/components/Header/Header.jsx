@@ -1,3 +1,5 @@
+import { NavBar } from '../../components/NavBar/NavBar';
+
 import style from './Header.module.scss';
 
 export const Header = (props) => {
@@ -6,6 +8,7 @@ export const Header = (props) => {
 		<header className={style.header}>
 			<div className={style.header__wrap + ' container'}>
 				<h1>{props.lesson}</h1>
+				<NavBar />
 			</div>
 		</header>
 	);
