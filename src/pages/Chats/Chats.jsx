@@ -52,6 +52,7 @@ const defaultMessages = {
 //    },
 // ];
 
+// export default function Chats() {
 export const Chats = () => {
    const [messages, setMessages] = useState(defaultMessages);
 
