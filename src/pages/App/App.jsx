@@ -1,11 +1,10 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 import style from './App.module.scss';
 
 import { Header } from '../../components/Header/Header';
 import { Profile } from '../Profile/Profile';
-import { NotFound } from '../NotFound/NotFound';
 import { Footer } from '../../components/Footer/Footer';
 
 // const Chats = React.lazy(() => import('../Chats/Chats'));
@@ -30,7 +29,7 @@ export default function App() {
 							<Chats />
 						</React.Suspense>
 					} />
-					<Route path="*" element={<NotFound />} />
+					<Route path="*" element={<Navigate to="/" />} />
 				</Routes>
 			</BrowserRouter>
 			<Footer />

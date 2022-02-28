@@ -1,4 +1,3 @@
-import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 import style from './ChatList.module.scss';
@@ -10,6 +9,7 @@ import IconButton from '@mui/material/IconButton';
 import CommentIcon from '@mui/icons-material/Comment';
 
 export const ChatList = ({ chats }) => {
+
    return (
       <div className={style.chatList}>Чаты:
          <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>

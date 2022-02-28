@@ -1,7 +1,6 @@
 import style from './MessageList.module.scss';
 
 export const MessageList = (props) => {
-
    return (
       <ul className={style.messages}>Сообщения:
          {props.message.map((item, idx) => {

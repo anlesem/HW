@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 
 export const Form = ({ addMessage }) => {
+
    const [author, setAuthor] = useState('');
    const [text, setText] = useState('');
    const myRef = useRef(null);
