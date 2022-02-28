@@ -1,0 +1,17 @@
+.chatList {
+   width: 30%;
+   margin-top: 40px;
+   padding-left: 20px;
+   font-size: 20px;
+   font-weight: semibold;
+}
+
+.active {
+   display: block;
+   border-radius: 50%;
+   background-color: #555;
+
+   svg {
+      fill: #fff;
+   }
+}

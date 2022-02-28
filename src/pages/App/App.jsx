@@ -25,7 +25,11 @@ export default function App() {
 							<Chats />
 						</React.Suspense>
 					} />
-					<Route path=":chatId" element={<Chats />} />
+					<Route path="chats/:chatId" element={
+						<React.Suspense fallback={<>...</>}>
+							<Chats />
+						</React.Suspense>
+					} />
 					<Route path="*" element={<NotFound />} />
 				</Routes>
 			</BrowserRouter>
