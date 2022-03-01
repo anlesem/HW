@@ -3,11 +3,19 @@
    max-width: 1000px;
    margin: 0 auto;
    width: 100%;
+   height: calc(100% - 100px - 40px);
+   overflow: hidden;
 
    display: flex;
-   justify-content: space-between;
+   justify-content: space-around;
 }
 
-.chats {
-   width: 100%;
+.messages {
+   width: 50%;
+   height: 100%;
+   padding: 20px 20px 80px;
+   font-size: 20px;
+   font-weight: semibold;
+
+   overflow-y: auto;
 }

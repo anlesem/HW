@@ -105,7 +105,6 @@ export const Chats = () => {
       }
    }, [chatId, messages, sendMassage]);
 
-
    let index = chats.findIndex(item => item.id === `${chatId}`);
    if (chatId && index < 0) {
       return <Navigate to="/chats" />;
@@ -114,8 +113,10 @@ export const Chats = () => {
    return (
       <div className={style.main}>
          <ChatList chatData={{ chatId, chats, addChat, removeChat }} />
-         <Form formData={{ chatId, sendMassage }} />
-         <MessageList message={chatId ? messages[`chat${chatId}`] : []} />
+         <div className={style.messages}>Сообщения:
+            <Form formData={{ chatId, sendMassage }} />
+            <MessageList message={chatId ? messages[`chat${chatId}`] : []} />
+         </div>
       </div>
    );
 }

@@ -1,9 +1,17 @@
 .chatList {
-   width: 30%;
-   margin-top: 40px;
-   padding-left: 20px;
+   width: 35%;
+   height: 100%;
+   padding: 20px 20px 50px;
    font-size: 20px;
    font-weight: semibold;
+
+   overflow-y: auto;
+}
+
+.chatManage {
+   position: absolute;
+   bottom: 20px;
+   background-color: #fff;
 }
 
 .active {

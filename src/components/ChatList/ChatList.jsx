@@ -34,7 +34,7 @@ export const ChatList = ({ chatData }) => {
                </ListItem>
             ))}
          </List>
-         <Stack direction="row" spacing={2}>
+         <Stack direction="row" spacing={2} className={style.chatManage}>
             <Button
                variant="outlined"
                startIcon={<DeleteIcon />}
