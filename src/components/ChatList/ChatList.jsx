@@ -8,12 +8,17 @@ import ListItemText from '@mui/material/ListItemText';
 import IconButton from '@mui/material/IconButton';
 import CommentIcon from '@mui/icons-material/Comment';
 
-export const ChatList = ({ chats }) => {
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import AddIcon from '@mui/icons-material/Add';
+import DeleteIcon from '@mui/icons-material/Delete';
+
+export const ChatList = ({ chatData }) => {
 
    return (
       <div className={style.chatList}>Чаты:
          <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-            {chats.map((chat, idx) => (
+            {chatData.chats.map((chat) => (
                <ListItem
                   key={chat.id}
                   disableGutters
@@ -25,10 +30,26 @@ export const ChatList = ({ chats }) => {
                      </NavLink>
                   }
                >
-                  <ListItemText primary={chat.name} data-testid={'chat-item-' + idx} />
+                  <ListItemText primary={chat.name} data-testid={'chat-item-' + chat.id} />
                </ListItem>
             ))}
          </List>
+         <Stack direction="row" spacing={2}>
+            <Button
+               variant="outlined"
+               startIcon={<DeleteIcon />}
+               disabled={chatData.chatId ? false : true}
+               onClick={() => chatData.removeChat(chatData.chatId)}
+            >
+               Удалить
+            </Button>
+            <Button
+               variant="outlined"
+               startIcon={<AddIcon />}
+               onClick={() => chatData.addChat()}>
+               Добавить
+            </Button>
+         </Stack>
       </div>
    );
 };
