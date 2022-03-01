@@ -39,6 +39,7 @@ export const ChatList = ({ chatData }) => {
                variant="outlined"
                startIcon={<DeleteIcon />}
                disabled={chatData.chatId ? false : true}
+               data-testid="chats-button-remove"
                onClick={() => chatData.removeChat(chatData.chatId)}
             >
                Удалить
@@ -46,6 +47,7 @@ export const ChatList = ({ chatData }) => {
             <Button
                variant="outlined"
                startIcon={<AddIcon />}
+               data-testid="chats-button-add"
                onClick={() => chatData.addChat()}>
                Добавить
             </Button>

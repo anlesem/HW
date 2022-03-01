@@ -1,4 +1,6 @@
-import { render, screen } from '@testing-library/react';
+import React from 'react';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { Chats } from './Chats';
 
 describe('Chats', () => {
@@ -6,34 +8,65 @@ describe('Chats', () => {
       expect(Chats).toBeInstanceOf(Function);
    });
 
-   it('Изначально список чатов существует, но пустой', () => {
-      const message = [];
-      render(<Chats message={message} />);
+   it('При клике на кнопку в Форме содержимое Списка сообщений меняется', () => {
+      render(<BrowserRouter>
+         <Routes>
+            <Route path="chats/:chatId" element={
+               <React.Suspense fallback={<>...</>}>
+                  <Chats />
+               </React.Suspense>} />
+            <Route path="*" element={<Navigate to="chats/1" />} />
+         </Routes>
+      </BrowserRouter>);
 
-      expect(screen.getByRole('list')).toBeTruthy();
-      expect(screen.queryByRole('listitem')).toBeFalsy();
+      // screen.debug(undefined, 300000);
+
+      const input = screen.getByTestId('form-input');
+      const button = screen.getByTestId('form-button');
+
+      // Добавление нового сообщения.
+      fireEvent.change(input, { target: { value: 'SomeMessage' } });
+      expect(input.value).toBe('SomeMessage');
+      fireEvent.click(button);
+      expect(screen.getByText('SomeMessage')).toBeTruthy();
+      expect(screen.getByTestId('list-item-0')).toBeTruthy();
+
+      // Добавление нового сообщения. Список сообщений меняется, а Чат нет
+      fireEvent.change(input, { target: { value: 'AnotherMessage' } });
+      expect(input.value).toBe('AnotherMessage');
+      fireEvent.click(button);
+      expect(screen.getByTestId('list-item-1')).toBeTruthy();
    });
 
-   it('Сформированный список сообщений', () => {
-      const message = [{
-         id: 1,
-         author: 'somebody',
-         text: 'some text',
-      },
-      {
-         id: 2,
-         author: 'another',
-         text: 'some text',
-      },
-      {
-         id: 3,
-         author: 'somebody',
-         text: 'some text',
-      }];
-      render(<Chats message={message} />);
+   it('При клике на кнопку Добавить чат список чатов меняется', () => {
+      render(<BrowserRouter>
+         <Routes>
+            <Route path="chats" element={
+               <React.Suspense fallback={<>...</>}>
+                  <Chats />
+               </React.Suspense>} />
+            <Route path="chats/:chatId" element={
+               <React.Suspense fallback={<>...</>}>
+                  <Chats />
+               </React.Suspense>} />
+            <Route path="/" element={<Navigate to="chats/1" />} />
+         </Routes>
+      </BrowserRouter>);
 
-      expect(screen.getAllByRole('listitem')).toHaveLength(2);
-      expect(screen.getAllByText(/somebody/)).toHaveLength(1);
-      expect(screen.getAllByText(/another/)).toHaveLength(1);
+      const buttonAdd = screen.getByTestId('chats-button-add');
+      const buttonRemove = screen.getByTestId('chats-button-remove');
+
+      expect(screen.getByTestId('chat-item-1')).toBeTruthy();
+      expect(screen.queryByTestId('chat-item-4')).not.toBeInTheDocument();
+
+      fireEvent.click(buttonAdd);
+      expect(screen.getByTestId('chat-item-4')).toBeTruthy();
+
+      fireEvent.click(buttonAdd);
+      expect(screen.getByTestId('chat-item-5')).toBeTruthy();
+
+      fireEvent.click(buttonRemove);
+      expect(screen.queryByTestId('chat-item-1')).not.toBeInTheDocument();
    });
+
 });

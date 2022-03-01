@@ -7,29 +7,37 @@ describe('Form', () => {
    });
 
    it('Начало: Основное поле ввода пустое', () => {
-      render(<Form />);
-      const input = screen.getByTestId('form-inputAuthor');
+      const chatId = '2';
+      const formData = { 'chatId': chatId };
+      render(<Form formData={{ formData }} />);
+
+      const input = screen.getByTestId('form-input');
       expect(input.value).toBe('');
    });
 
    it('Заполнение поле ввода', () => {
-      render(<Form />);
-      const input = screen.getByTestId('form-inputAuthor');
+      const chatId = '2';
+      const formData = { 'chatId': chatId };
+      render(<Form formData={{ formData }} />);
+
+      const input = screen.getByTestId('form-input');
 
       fireEvent.change(input, { target: { value: 'bla-bla-bla' } });
       expect(input.value).toBe('bla-bla-bla');
    });
 
    it('Обработка клика на кнопку', () => {
-      const addMessage = jest.fn();
+      const chatId = '2';
+      const formData = { 'chatId': chatId };
+      const sendMassage = jest.fn();
 
-      render(<Form addMessage={addMessage} />);
+      render(<Form formData={{ chatId, sendMassage, formData }} />);
 
-      const input = screen.getByTestId('form-inputAuthor');
+      const input = screen.getByTestId('form-input');
       const button = screen.getByTestId('form-button');
 
       fireEvent.click(button);
-      expect(addMessage).toBeCalled();
+      expect(sendMassage).toBeCalled();
       expect(input.value).toBe('');
    });
 });
