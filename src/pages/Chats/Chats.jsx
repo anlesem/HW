@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { useParams, Navigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { nanoid } from 'nanoid';
 
 import { ChatList } from '../../components/ChatList/ChatList';
@@ -52,6 +52,7 @@ export const Chats = () => {
    const [messages, setMessages] = useState(defaultMessages);
    const [chats, setChats] = useState(defaultChats);
    const { chatId } = useParams();
+   const navigate = useNavigate();
 
    const sendMassage = useCallback((text, author = 'User') => {
       if (text) {
@@ -92,7 +93,11 @@ export const Chats = () => {
    }
 
    useEffect(() => {
-      if (chatId && messages[`chat${chatId}`][messages[`chat${chatId}`].length - 1].author !== 'BOT') {
+      let index = chats.findIndex(item => item.id === `${chatId}`);
+      if (index < 0) {
+         navigate("/chats");
+      }
+      if (index > 0 && messages[`chat${chatId}`][messages[`chat${chatId}`].length - 1].author !== 'BOT') {
          const timeout = setTimeout(
             () =>
                sendMassage('Im BOT', 'BOT'),
@@ -103,19 +108,14 @@ export const Chats = () => {
             clearTimeout(timeout);
          };
       }
-   }, [chatId, messages, sendMassage]);
-
-   let index = chats.findIndex(item => item.id === `${chatId}`);
-   if (chatId && index < 0) {
-      return <Navigate to="/chats" />;
-   }
+   }, [chatId, chats, messages, navigate, sendMassage]);
 
    return (
       <div className={style.main}>
          <ChatList chatData={{ chatId, chats, addChat, removeChat }} />
          <div className={style.messages}>Сообщения:
             <Form formData={{ chatId, sendMassage }} />
-            <MessageList message={chatId ? messages[`chat${chatId}`] : []} />
+            <MessageList message={messages[`chat${chatId}`]} />
          </div>
       </div>
    );

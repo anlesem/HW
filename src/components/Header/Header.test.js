@@ -1,3 +1,4 @@
+import { BrowserRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 import { Header } from './Header';
 
@@ -8,7 +9,7 @@ describe('Header', () => {
 
    it('Изначально список сообщений существует, но пустой', () => {
       const lesson = 'Урок';
-      render(<Header lesson={lesson} />);
+      render(<BrowserRouter><Header lesson={lesson} /></BrowserRouter>);
 
       expect(screen.getByText(/урок/i)).toBeTruthy();
    });
