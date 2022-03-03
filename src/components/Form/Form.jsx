@@ -8,7 +8,7 @@ import TextField from '@mui/material/TextField';
 export const Form = ({ formData }) => {
    const [text, setText] = useState('');
    const [textInput, setTextInput] = useState([]);
-   const myRef = useRef(null);
+   const focusForm = useRef(null);
 
    const handleSubmit = (event) => {
       event.preventDefault();
@@ -46,7 +46,7 @@ export const Form = ({ formData }) => {
 
 
    useEffect(() => {
-      myRef.current.focus();
+      focusForm.current.focus();
    });
 
    return (
@@ -60,7 +60,7 @@ export const Form = ({ formData }) => {
             value={text}
             onChange={event => handleInput(event.target.value)}
             onKeyDown={event => handleKeyDown(event)}
-            inputRef={myRef}
+            inputRef={focusForm}
             disabled={formData.chatId > 0 ? false : true}
             required
             inputProps={{ "data-testid": "form-input" }}

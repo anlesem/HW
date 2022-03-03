@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import { useEffect, useRef } from 'react';
 
 import style from './ChatList.module.scss';
 
@@ -14,9 +15,14 @@ import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 export const ChatList = ({ chatData }) => {
+   const scrollChats = useRef(null);
+
+   useEffect(() => {
+      scrollChats.current.scrollTop = scrollChats.current.scrollHeight - scrollChats.current.clientHeight;
+   });
 
    return (
-      <div className={style.chatList}>Чаты:
+      <div className={style.chatList} ref={scrollChats}>Чаты:
          <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
             {chatData.chats.map((chat) => (
                <ListItem
