@@ -8,16 +8,38 @@
    overflow-y: auto;
 }
 
-.chatManage {
+.form {
    position: absolute;
    bottom: 20px;
    background-color: #fff;
 }
 
+.rename {
+   width: 100%;
+   background-color: #fff;
+   margin-bottom: 20px;
+
+   display: flex;
+
+   button {
+      margin-left: 10px;
+   }
+}
+
+.manage {
+   width: 100%;
+   background-color: #fff;
+
+   display: flex;
+   justify-content: space-between;
+}
+
 .active {
-   display: block;
-   border-radius: 50%;
-   background-color: #555;
+
+   button {
+      border-radius: 50%;
+      background-color: #555;
+   }
 
    svg {
       fill: #fff;

@@ -38,8 +38,19 @@ export const Chats = () => {
       setCounterId(counterId + 1);
    }, [counterId])
 
-   const removeChat = useCallback((id) => {
-      setChats(chats.filter(item => item.id !== `${id}`));
+   const renameChat = useCallback((id, name) => {
+      let update = [...chats];
+
+      update.find(item => item.id === `${id}`).name = name;
+      setChats(update);
+   }, [chats])
+
+   const removeChat = useCallback((checked) => {
+      let update = [...chats];
+      checked.forEach(id => {
+         update = update.filter(item => item.id !== `${id}`);
+      });
+      setChats(update);
    }, [chats])
 
    useEffect(() => {
@@ -54,7 +65,7 @@ export const Chats = () => {
 
    return (
       <div className={style.main}>
-         <ChatList chatData={{ chatId, chats, addChat, removeChat }} />
+         <ChatList chatData={{ chatId, chats, addChat, removeChat, renameChat }} />
          {chatId && chatIs ? <Message chatId={chatId} /> : <Message chatId="0" />}
       </div>
    );
