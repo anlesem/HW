@@ -6,7 +6,7 @@ export const Header = (props) => {
 
 	return (
 		<header className={style.header}>
-			<div className={style.header__wrap + ' container'}>
+			<div className={style.wrap + ' container'}>
 				<h1>{props.lesson}</h1>
 				<NavBar />
 			</div>

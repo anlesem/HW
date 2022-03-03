@@ -1,5 +1,9 @@
-.message {
-	width: 100%;
-	margin-top: 40px;
-	text-align: center;
+.messages {
+	width: 50%;
+	height: 100%;
+	padding: 20px 20px 80px;
+	font-size: 20px;
+	font-weight: semibold;
+
+	overflow-y: auto;
 }

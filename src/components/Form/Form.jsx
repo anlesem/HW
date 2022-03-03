@@ -11,8 +11,10 @@ export const Form = ({ formData }) => {
 
    const handleSubmit = (event) => {
       event.preventDefault();
-      formData.sendMassage(text);
-      setText('');
+      if (text) {
+         formData.sendMassage(text);
+         setText('');
+      }
    }
 
    useEffect(() => {
@@ -30,7 +32,7 @@ export const Form = ({ formData }) => {
             value={text}
             onChange={event => setText(event.target.value)}
             inputRef={myRef}
-            disabled={formData.chatId ? false : true}
+            disabled={formData.chatId > 0 ? false : true}
             required
             inputProps={{ "data-testid": "form-input" }}
             className={style.textField}
@@ -39,7 +41,7 @@ export const Form = ({ formData }) => {
             variant="outlined"
             type="submit"
             sx={{ mt: 2 }}
-            disabled={formData.chatId ? false : true}
+            disabled={formData.chatId > 0 ? false : true}
             data-testid='form-button'>
             <SendIcon />
          </Button>

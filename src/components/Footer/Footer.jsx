@@ -6,7 +6,7 @@ export const Footer = () => {
 
 	return (
 		<footer className={style.footer}>
-			<div className={style.footer__wrap + " container"}>
+			<div className={style.wrap + " container"}>
 				<p className={style.date} data-testid="footer-paragraph">&copy; {now}</p>
 			</div>
 		</footer>

@@ -3,14 +3,14 @@
 	height: 100px;
 	background-color: #999;
 
-	&__wrap {
-		display: grid;
-		place-items: center;
-		height: 100%;
-	}
-
 	h1 {
 		font-size: 24px;
 		font-weight: bold;
 	}
+}
+
+.wrap {
+	display: grid;
+	place-items: center;
+	height: 100%;
 }
