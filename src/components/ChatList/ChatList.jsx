@@ -82,26 +82,27 @@ export const ChatList = ({ chatData }) => {
                return (
                   <ListItem
                      key={chat.id}
+
                      secondaryAction={
                         <NavLink to={`/chats/${chat.id}`} className={({ isActive }) => isActive ? style.active : ''}>
-                           <IconButton edge="end" aria-label="comments">
+                           <IconButton edge="end" aria-label="comments" data-testid={'chat-change-' + chat.id}>
                               <CommentIcon />
                            </IconButton>
                         </NavLink>
                      }
                      disablePadding
                   >
-                     <ListItemButton role={undefined} onClick={handleToggle(chat.id)} dense>
+                     <ListItemButton role={undefined} onClick={handleToggle(chat.id)} dense data-testid={'chat-item-' + chat.id}>
                         <ListItemIcon>
                            <Checkbox
                               edge="start"
                               checked={checked.indexOf(chat.id) !== -1}
                               tabIndex={-1}
                               disableRipple
-                              inputProps={{ 'aria-labelledby': labelId }}
+                              inputProps={{ 'aria-labelledby': labelId, "data-testid": `chat-check-${chat.id}` }}
                            />
                         </ListItemIcon>
-                        <ListItemText id={labelId} primary={chat.name} data-testid={'chat-item-' + chat.id} />
+                        <ListItemText id={labelId} primary={chat.name} />
                      </ListItemButton>
                   </ListItem>
                );

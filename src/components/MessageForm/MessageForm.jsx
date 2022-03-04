@@ -61,14 +61,14 @@ export const MessageForm = ({ formData }) => {
             inputRef={focusForm}
             disabled={formData.chatId > 0 ? false : true}
             required
-            inputProps={{ "data-testid": "form-input" }}
+            inputProps={{ "data-testid": "message-form-input" }}
             className={style.textField}
          />
          <Button
             variant="outlined"
             type="submit"
             disabled={formData.chatId > 0 ? false : true}
-            data-testid='form-button'>
+            data-testid='message-form-button'>
             <SendIcon />
          </Button>
       </form>
