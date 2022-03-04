@@ -26,7 +26,7 @@ export const MessageForm = ({ formData }) => {
    }
 
    const handleKeyDown = (event) => {
-      if (event.keyCode === 13) {
+      if (event.keyCode === 13 && !event.shiftKey) {
          event.preventDefault();
          handleSubmit(event);
       }

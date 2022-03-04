@@ -11,14 +11,6 @@ const defaultChats = [
       id: '1',
       name: 'чат 1',
    },
-   {
-      id: '2',
-      name: 'чат 2',
-   },
-   {
-      id: '3',
-      name: 'чат 3',
-   },
 ];
 
 export const Chats = () => {

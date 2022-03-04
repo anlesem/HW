@@ -21,20 +21,6 @@ const defaultMessages = {
 			text: 'Добро пожаловать в чат №1',
 		},
 	],
-	chat2: [
-		{
-			id: '1',
-			author: 'BOT',
-			text: 'Добро пожаловать в чат №2',
-		},
-	],
-	chat3: [
-		{
-			id: '1',
-			author: 'BOT',
-			text: 'Добро пожаловать в чат №3',
-		},
-	],
 };
 
 export const Message = ({ chatId }) => {
