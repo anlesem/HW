@@ -1,8 +1,8 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { nanoid } from 'nanoid';
 
 import { MessageList } from '../../components/MessageList/MessageList';
-import { Form } from '../../components/Form/Form';
+import { MessageForm } from '../MessageForm/MessageForm';
 
 import style from './Message.module.scss';
 
@@ -39,7 +39,6 @@ const defaultMessages = {
 
 export const Message = ({ chatId }) => {
 	const [messages, setMessages] = useState(defaultMessages);
-	const scrollChats = useRef(null);
 
 	const sendMassage = useCallback((text, author = 'User', id = nanoid()) => {
 		setMessages((prevMessages) => ({
@@ -76,14 +75,10 @@ export const Message = ({ chatId }) => {
 		}
 	}, [chatId, messages, sendMassage]);
 
-	useEffect(() => {
-		scrollChats.current.scrollTop = scrollChats.current.scrollHeight - scrollChats.current.clientHeight;
-	});
-
 	return (
-		<div className={style.messages} ref={scrollChats}>Сообщения:
+		<div className={style.wrap}>
 			<MessageList message={messages[`chat${chatId}`]} />
-			<Form formData={{ chatId, sendMassage }} />
+			<MessageForm formData={{ chatId, sendMassage }} />
 		</div>
 	);
 }

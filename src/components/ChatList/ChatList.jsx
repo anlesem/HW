@@ -36,6 +36,11 @@ export const ChatList = ({ chatData }) => {
       setChecked(newChecked);
    };
 
+   const handleAdd = () => {
+      chatData.addChat()
+      scrollChats.current.scrollTop = scrollChats.current.scrollHeight - scrollChats.current.clientHeight;
+   }
+
    const handleSubmit = (event) => {
       event.preventDefault();
       if (text) {
@@ -51,9 +56,7 @@ export const ChatList = ({ chatData }) => {
    }
 
    const handleInput = (value) => {
-      if (value) {
-         setText(value);
-      }
+      setText(value);
    }
 
    const handleKeyDown = (event) => {
@@ -64,16 +67,15 @@ export const ChatList = ({ chatData }) => {
    }
 
    useEffect(() => {
-      scrollChats.current.scrollTop = scrollChats.current.scrollHeight - scrollChats.current.clientHeight;
-   });
-
-   useEffect(() => {
       setText('');
    }, [checked]);
 
    return (
-      <div className={style.chatList} ref={scrollChats}>Чаты:
-         <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+      <div className={style.wrap}>
+         <List
+            sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
+            className={style.chatList}
+            ref={scrollChats}>
             {chatData.chats.map((chat) => {
                const labelId = `checkbox-list-label-${chat.id}`;
 
@@ -105,48 +107,43 @@ export const ChatList = ({ chatData }) => {
                );
             })}
          </List>
-         <div className={style.form} >
-            {checked.length === 2 && <form className={style.rename} onSubmit={handleSubmit}>
-               <TextField
-                  id="outlined-basic"
-                  name="chat"
-                  label="Название чата"
-                  variant="outlined"
-                  sx={{ mt: 2 }}
-                  value={text}
-                  onChange={event => handleInput(event.target.value)}
-                  onKeyDown={event => handleKeyDown(event)}
-                  required
-                  inputProps={{ "data-testid": "chat-form-input" }}
-                  className={style.textField}
-               />
-               <Button
-                  variant="outlined"
-                  type="submit"
-                  sx={{ mt: 2 }}
-                  data-testid='chat-form-button'>
-                  <SendIcon />
-               </Button>
-            </form>}
-            <Stack direction="row" spacing={2} className={style.manage}>
-               <Button
-                  variant="outlined"
-                  startIcon={<DeleteIcon />}
-                  disabled={checked.length > 1 ? false : true}
-                  data-testid="chats-button-remove"
-                  onClick={() => handleDelete(checked)}
-               >
-                  Удалить
-               </Button>
-               <Button
-                  variant="outlined"
-                  startIcon={<AddIcon />}
-                  data-testid="chats-button-add"
-                  onClick={() => chatData.addChat()}>
-                  Добавить
-               </Button>
-            </Stack>
-         </div>
+         <Stack direction="row" spacing={2} className={style.manage}>
+            <Button
+               variant="outlined"
+               startIcon={<DeleteIcon />}
+               disabled={checked.length > 1 ? false : true}
+               data-testid="chats-button-remove"
+               onClick={() => handleDelete(checked)}
+            >
+               Удалить
+            </Button>
+            <Button
+               variant="outlined"
+               startIcon={<AddIcon />}
+               data-testid="chats-button-add"
+               onClick={() => handleAdd(checked)}>
+               Добавить
+            </Button>
+         </Stack>
+         {checked.length === 2 && <form className={style.rename} onSubmit={handleSubmit}>
+            <TextField
+               id="outlined-basic"
+               name="chat"
+               label="Название чата"
+               variant="outlined"
+               value={text}
+               onChange={event => handleInput(event.target.value)}
+               onKeyDown={event => handleKeyDown(event)}
+               required
+               inputProps={{ "data-testid": "chat-form-input" }}
+               className={style.textField}
+            />
+            <Button
+               variant="outlined"
+               type="submit"
+               data-testid='chat-form-button'>
+               <SendIcon />
+            </Button></form>}
       </div>
    );
 };

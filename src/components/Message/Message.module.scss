@@ -1,9 +1,6 @@
-.messages {
-	width: 50%;
+.wrap {
 	height: 100%;
-	padding: 20px 20px 80px;
-	font-size: 20px;
-	font-weight: semibold;
-
-	overflow-y: auto;
+	padding-bottom: 20px;
+	display: grid;
+	grid-template-rows: 1fr 50px;
 }

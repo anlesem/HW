@@ -1,11 +1,12 @@
 import { useState, useRef, useEffect } from 'react';
 
-import style from './Form.module.scss';
+import style from './MessageForm.module.scss';
+
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import TextField from '@mui/material/TextField';
 
-export const Form = ({ formData }) => {
+export const MessageForm = ({ formData }) => {
    const [text, setText] = useState('');
    const [textInput, setTextInput] = useState([]);
    const focusForm = useRef(null);
@@ -20,10 +21,8 @@ export const Form = ({ formData }) => {
    }
 
    const handleInput = (value) => {
-      if (value) {
-         setText(value);
-         arrTextInput(value);
-      }
+      setText(value);
+      arrTextInput(value);
    }
 
    const handleKeyDown = (event) => {
@@ -55,7 +54,6 @@ export const Form = ({ formData }) => {
             id="outlined-multiline-static"
             name="text"
             label="Текст сообщения"
-            sx={{ mt: 2 }}
             multiline rows={2}
             value={text}
             onChange={event => handleInput(event.target.value)}
@@ -69,7 +67,6 @@ export const Form = ({ formData }) => {
          <Button
             variant="outlined"
             type="submit"
-            sx={{ mt: 2 }}
             disabled={formData.chatId > 0 ? false : true}
             data-testid='form-button'>
             <SendIcon />

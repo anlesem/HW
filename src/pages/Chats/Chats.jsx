@@ -65,8 +65,12 @@ export const Chats = () => {
 
    return (
       <div className={style.main}>
-         <ChatList chatData={{ chatId, chats, addChat, removeChat, renameChat }} />
-         {chatId && chatIs ? <Message chatId={chatId} /> : <Message chatId="0" />}
+         <div className={style.chats}>Чаты:
+            <ChatList chatData={{ chatId, chats, addChat, removeChat, renameChat }} />
+         </div>
+         <div className={style.messages} >Сообщения:
+            {chatId && chatIs ? <Message chatId={chatId} /> : <Message chatId="0" />}
+         </div>
       </div>
    );
 }
