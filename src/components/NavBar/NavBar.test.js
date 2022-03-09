@@ -1,16 +1,17 @@
 import { BrowserRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
-import { Header } from './Header';
 
-describe('Header', () => {
+import { NavBar } from './NavBar';
+
+describe('NavBar', () => {
    it('Компонент существует', () => {
-      expect(Header).toBeInstanceOf(Function);
+      expect(NavBar).toBeInstanceOf(Function);
    });
 
    it('Изначально список сообщений существует, но пустой', () => {
-      const lesson = 'Урок';
-      render(<BrowserRouter><Header lesson={lesson} /></BrowserRouter>);
+      render(<BrowserRouter><NavBar /></BrowserRouter>);
 
-      expect(screen.getByText(/урок/i)).toBeTruthy();
+      expect(screen.getByRole('list')).toBeTruthy();
+      expect(screen.getAllByRole('listitem')).toHaveLength(2);
    });
 });

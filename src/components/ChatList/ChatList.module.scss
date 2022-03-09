@@ -1,0 +1,50 @@
+.wrap {
+   height: 100%;
+   padding-bottom: 20px;
+   display: grid;
+   grid-template-rows: 1fr 50px;
+}
+
+.chatList {
+   padding: 0 20px !important;
+   overflow-y: auto;
+}
+
+.manage {
+   width: 100%;
+   background-color: #fff;
+
+   display: flex;
+   justify-content: space-between;
+}
+
+.rename {
+   position: absolute;
+   top: 5px;
+   width: 100%;
+   background-color: #fff;
+   margin-bottom: 20px;
+
+   display: flex;
+   justify-content: space-between;
+
+   button {
+      margin-left: 10px;
+   }
+}
+
+.textField {
+   flex-grow: 1;
+}
+
+.active {
+
+   button {
+      border-radius: 50%;
+      background-color: #555;
+   }
+
+   svg {
+      fill: #fff;
+   }
+}

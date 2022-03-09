@@ -1,0 +1,15 @@
+.form {
+   width: 100%;
+   background-color: #fff;
+
+   display: flex;
+   justify-content: space-between;
+
+   button {
+      margin-left: 10px;
+   }
+}
+
+.textField {
+   flex-grow: 1;
+}
