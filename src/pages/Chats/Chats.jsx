@@ -32,7 +32,6 @@ export const Chats = () => {
 
    const renameChat = useCallback((id, name) => {
       let update = [...chats];
-
       update.find(item => item.id === `${id}`).name = name;
       setChats(update);
    }, [chats])
