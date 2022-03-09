@@ -1,8 +1,9 @@
-import { TOGGLE_PROFILE } from './actions';
+import { TOGGLE_PROFILE, INPUT_NAME, CHANGE_NAME } from './actions';
 
 const initialState = {
    visible: false,
-   name: 'Default'
+   input: '',
+   name: 'user'
 }
 
 export const profileReducer = (state = initialState, Action) => {
@@ -10,6 +11,18 @@ export const profileReducer = (state = initialState, Action) => {
       case TOGGLE_PROFILE:
          return {
             ...state,
+            visible: !state.visible,
+         };
+      case INPUT_NAME:
+         return {
+            ...state,
+            input: Action.value,
+         };
+      case CHANGE_NAME:
+         return {
+            ...state,
+            name: state.input,
+            input: '',
             visible: !state.visible,
          };
       default:

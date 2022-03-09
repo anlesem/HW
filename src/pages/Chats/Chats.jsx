@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import { ChatList } from '../../components/ChatList/ChatList';
 import { Message } from '../../components/Message/Message';
@@ -19,6 +20,7 @@ export const Chats = () => {
    const [chatIs, setChatIs] = useState(false);
    const { chatId } = useParams();
    const navigate = useNavigate();
+   const { name } = useSelector((state) => state);
 
    const addChat = useCallback(() => {
       setChats((prevChats) => ([
@@ -56,7 +58,7 @@ export const Chats = () => {
 
    return (
       <div className={style.main}>
-         <div className={style.chats}>Чаты:
+         <div className={style.chats}>Чаты {name}:
             <ChatList chatData={{ chatId, chats, addChat, removeChat, renameChat }} />
          </div>
          <div className={style.messages} >Сообщения:
