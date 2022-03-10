@@ -7,6 +7,22 @@ describe('ChatList', () => {
       expect(ChatList).toBeInstanceOf(Function);
    });
 
+   it('Снимок состояния', () => {
+      const chatId = 1;
+      const chats = [{
+         id: '1',
+         name: 'чат 1',
+      },
+      {
+         id: '2',
+         name: 'чат 2',
+      },];
+      const { asFragment } = render(<BrowserRouter>
+         <ChatList chatData={{ chatId, chats }} />
+      </BrowserRouter>);
+      expect(asFragment(<ChatList />)).toMatchSnapshot();
+   });
+
    it('Список чатов', () => {
       const chatId = 1;
       const chats = [{

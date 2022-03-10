@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MessageList Снимок состояния 1`] = `
+<DocumentFragment>
+  <ul
+    class="messages"
+  >
+    <li
+      class="message"
+      data-testid="list-item-0"
+    >
+      <p
+        class="message_text"
+      >
+        some text
+      </p>
+      <p
+        class="message_author"
+      >
+        somebody
+      </p>
+    </li>
+  </ul>
+</DocumentFragment>
+`;

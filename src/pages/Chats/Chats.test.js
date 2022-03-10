@@ -3,13 +3,16 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Chats } from './Chats';
 
+import { Provider } from 'react-redux';
+import { store } from '../../store/store';
+
 describe('Chats', () => {
    it('Компонент существует', () => {
       expect(Chats).toBeInstanceOf(Function);
    });
 
-   it('Состояние при переходе на вкладку Чаты', () => {
-      render(<BrowserRouter>
+   it('Снимок состояния', () => {
+      const { asFragment } = render(<Provider store={store}><BrowserRouter>
          <Routes>
             <Route path="chats" element={
                <React.Suspense fallback={<>...</>}>
@@ -17,7 +20,20 @@ describe('Chats', () => {
                </React.Suspense>} />
             <Route path="*" element={<Navigate to="chats" />} />
          </Routes>
-      </BrowserRouter>);
+      </BrowserRouter></Provider>);
+      expect(asFragment(<Chats />)).toMatchSnapshot();
+   });
+
+   it('Состояние при переходе на вкладку Чаты', () => {
+      render(<Provider store={store}><BrowserRouter>
+         <Routes>
+            <Route path="chats" element={
+               <React.Suspense fallback={<>...</>}>
+                  <Chats />
+               </React.Suspense>} />
+            <Route path="*" element={<Navigate to="chats" />} />
+         </Routes>
+      </BrowserRouter></Provider>);
 
       const buttonRemove = screen.getByTestId('chats-button-remove');
       const inputMessage = screen.getByTestId('message-form-input');
@@ -34,7 +50,7 @@ describe('Chats', () => {
    });
 
    it('Добавление чата', () => {
-      render(<BrowserRouter>
+      render(<Provider store={store}><BrowserRouter>
          <Routes>
             <Route path="chats" element={
                <React.Suspense fallback={<>...</>}>
@@ -42,7 +58,7 @@ describe('Chats', () => {
                </React.Suspense>} />
             <Route path="*" element={<Navigate to="chats" />} />
          </Routes>
-      </BrowserRouter>);
+      </BrowserRouter></Provider>);
 
       const buttonAdd = screen.getByTestId('chats-button-add');
 
@@ -57,7 +73,7 @@ describe('Chats', () => {
    });
 
    it('Удаление чата', () => {
-      render(<BrowserRouter>
+      render(<Provider store={store}><BrowserRouter>
          <Routes>
             <Route path="chats" element={
                <React.Suspense fallback={<>...</>}>
@@ -65,7 +81,7 @@ describe('Chats', () => {
                </React.Suspense>} />
             <Route path="*" element={<Navigate to="chats" />} />
          </Routes>
-      </BrowserRouter>);
+      </BrowserRouter></Provider>);
 
       const chatItem1 = screen.getByTestId('chat-item-1');
       const buttonAdd = screen.getByTestId('chats-button-add');
@@ -131,7 +147,7 @@ describe('Chats', () => {
    });
 
    it('Переименование чата', () => {
-      render(<BrowserRouter>
+      render(<Provider store={store}><BrowserRouter>
          <Routes>
             <Route path="chats" element={
                <React.Suspense fallback={<>...</>}>
@@ -139,7 +155,7 @@ describe('Chats', () => {
                </React.Suspense>} />
             <Route path="*" element={<Navigate to="chats" />} />
          </Routes>
-      </BrowserRouter>);
+      </BrowserRouter></Provider>);
 
       const buttonAdd = screen.getByTestId('chats-button-add');
       const chatItem1 = screen.getByTestId('chat-item-1');
@@ -176,11 +192,38 @@ describe('Chats', () => {
       expect(screen.getByText(/вася/i)).toBeTruthy();
       expect(screen.getByText(/чат 2/i)).toBeTruthy();
    });
+
+   it('Переименование чата по нажатию Enter', () => {
+      render(<Provider store={store}><BrowserRouter>
+         <Routes>
+            <Route path="chats" element={
+               <React.Suspense fallback={<>...</>}>
+                  <Chats />
+               </React.Suspense>} />
+            <Route path="*" element={<Navigate to="chats" />} />
+         </Routes>
+      </BrowserRouter></Provider>);
+
+      const chatItem1 = screen.getByTestId('chat-item-1');
+      expect(screen.getByText(/вася/i)).toBeTruthy();
+
+      fireEvent.click(chatItem1);
+
+      const inputName = screen.getByTestId('chat-form-input');
+
+      fireEvent.change(inputName, { target: { value: 'Петя' } });
+      expect(inputName.value).toBe('Петя');
+
+      fireEvent.keyDown(inputName, { key: 'enter', keyCode: 13 });
+      expect(screen.getByText(/петя/i)).toBeTruthy();
+      expect(screen.queryByTestId('chat-form-input')).toBeFalsy();
+      expect(screen.queryByTestId('chat-form-button')).toBeFalsy();
+   });
 });
 
 describe('Chats/id', () => {
    it('Состояние при открытии чата', () => {
-      render(<BrowserRouter>
+      render(<Provider store={store}><BrowserRouter>
          <Routes>
             <Route path="chats/:chatId" element={
                <React.Suspense fallback={<>...</>}>
@@ -188,7 +231,7 @@ describe('Chats/id', () => {
                </React.Suspense>} />
             <Route path="*" element={<Navigate to="chats/1" />} />
          </Routes>
-      </BrowserRouter>);
+      </BrowserRouter></Provider>);
 
       const inputMessage = screen.getByTestId('message-form-input');
       const buttonMessage = screen.getByTestId('message-form-button');
@@ -200,7 +243,7 @@ describe('Chats/id', () => {
    });
 
    it('Добавление сообщения', () => {
-      render(<BrowserRouter>
+      render(<Provider store={store}><BrowserRouter>
          <Routes>
             <Route path="chats/:chatId" element={
                <React.Suspense fallback={<>...</>}>
@@ -208,7 +251,7 @@ describe('Chats/id', () => {
                </React.Suspense>} />
             <Route path="*" element={<Navigate to="chats/1" />} />
          </Routes>
-      </BrowserRouter>);
+      </BrowserRouter></Provider>);
 
       const inputMessage = screen.getByTestId('message-form-input');
       const buttonMessage = screen.getByTestId('message-form-button');
@@ -226,7 +269,7 @@ describe('Chats/id', () => {
          fireEvent.change(inputMessage, { target: { value: 'AnotherMessage' } });
          expect(inputMessage.value).toBe('AnotherMessage');
 
-         fireEvent.click(buttonMessage);
+         fireEvent.keyDown(inputMessage, { key: 'enter', keyCode: 13 })
          expect(screen.getByText(/AnotherMessage/)).toBeTruthy();
          expect(screen.getByTestId('list-item-3')).toBeTruthy();
          expect(screen.queryByTestId('list-item-4')).toBeFalsy();
@@ -234,7 +277,7 @@ describe('Chats/id', () => {
    });
 
    it('Изменение значения поля ввода при переключении между чатами', () => {
-      render(<BrowserRouter>
+      render(<Provider store={store}><BrowserRouter>
          <Routes>
             <Route path="chats/:chatId" element={
                <React.Suspense fallback={<>...</>}>
@@ -242,7 +285,7 @@ describe('Chats/id', () => {
                </React.Suspense>} />
             <Route path="*" element={<Navigate to="chats/1" />} />
          </Routes>
-      </BrowserRouter>);
+      </BrowserRouter></Provider>);
 
       const buttonAdd = screen.getByTestId('chats-button-add');
       const inputMessage = screen.getByTestId('message-form-input');

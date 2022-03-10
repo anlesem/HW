@@ -6,6 +6,13 @@ describe('MessageForm', () => {
       expect(MessageForm).toBeInstanceOf(Function);
    });
 
+   it('Снимок состояния', () => {
+      const chatId = '1';
+      const formData = { 'chatId': chatId };
+      const { asFragment } = render(<MessageForm formData={{ formData }} />);
+      expect(asFragment(<MessageForm />)).toMatchSnapshot();
+   });
+
    it('Начало: Основное поле ввода пустое', () => {
       const chatId = '1';
       const formData = { 'chatId': chatId };

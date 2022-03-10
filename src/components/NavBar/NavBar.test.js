@@ -8,6 +8,11 @@ describe('NavBar', () => {
       expect(NavBar).toBeInstanceOf(Function);
    });
 
+   it('Снимок состояния', () => {
+      const { asFragment } = render(<BrowserRouter><NavBar /></BrowserRouter>);
+      expect(asFragment(<NavBar />)).toMatchSnapshot();
+   });
+
    it('Изначально список сообщений существует, но пустой', () => {
       render(<BrowserRouter><NavBar /></BrowserRouter>);
 
