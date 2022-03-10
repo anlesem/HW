@@ -11,6 +11,7 @@ describe('App', () => {
     render(<App />);
 
     expect(screen.getByText(/чаты/i)).toBeTruthy();
-    expect(screen.getAllByText(/профиль/i)).toBeTruthy();
+    expect(screen.getByText(/профиль/i)).toBeTruthy();
+    expect(screen.getAllByRole('heading')).toBeTruthy();
   });
 });

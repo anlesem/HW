@@ -78,11 +78,9 @@ export const ChatList = ({ chatData }) => {
             ref={scrollChats}>
             {chatData.chats.map((chat) => {
                const labelId = `checkbox-list-label-${chat.id}`;
-
                return (
                   <ListItem
                      key={chat.id}
-
                      secondaryAction={
                         <NavLink to={`/chats/${chat.id}`} className={({ isActive }) => isActive ? style.active : ''}>
                            <IconButton edge="end" aria-label="comments" data-testid={'chat-change-' + chat.id}>

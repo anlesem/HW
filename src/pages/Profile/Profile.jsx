@@ -40,8 +40,9 @@ export const Profile = () => {
       <div className={style.main}>
          <h1 className={style.head}>{name}</h1>
          <FormControlLabel
-            control={<Checkbox checked={visible} />}
+            control={<Checkbox checked={visible} inputProps={{ "data-testid": "profile-check" }} />}
             label="Авторизоваться"
+            data-testid={"profile-box"}
             onChange={() => dispatch(toggleVisible)}
          />
          {visible && <form className={style.form} onSubmit={event => handleSubmit(event)}>

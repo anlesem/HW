@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { store } from '../../store/store';
 
 import style from './App.module.scss';
 
-import { store } from '../../store/store';
 import { Header } from '../../components/Header/Header';
 import { Profile } from '../Profile/Profile';
 import { NotFound } from '../NotFound/NotFound';
