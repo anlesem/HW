@@ -62,7 +62,7 @@ export const Profile = () => {
             <Button
                variant="outlined"
                type="submit"
-               data-testid='profile-form-button'>
+               data-testid={"profile-form-button"}>
                <SendIcon />
             </Button></form>}
       </div>

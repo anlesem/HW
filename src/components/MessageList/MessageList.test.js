@@ -6,6 +6,16 @@ describe('MessageList', () => {
       expect(MessageList).toBeInstanceOf(Function);
    });
 
+   it('Снимок состояния', () => {
+      const message = [{
+         id: 1,
+         author: 'somebody',
+         text: 'some text',
+      }];
+      const { asFragment } = render(<MessageList message={message} />);
+      expect(asFragment(<MessageList />)).toMatchSnapshot();
+   });
+
    it('Изначально список сообщений существует, но пустой', () => {
       const message = [];
       render(<MessageList message={message} />);

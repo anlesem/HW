@@ -11,6 +11,19 @@ describe('Chats', () => {
       expect(Chats).toBeInstanceOf(Function);
    });
 
+   it('Снимок состояния', () => {
+      const { asFragment } = render(<Provider store={store}><BrowserRouter>
+         <Routes>
+            <Route path="chats" element={
+               <React.Suspense fallback={<>...</>}>
+                  <Chats />
+               </React.Suspense>} />
+            <Route path="*" element={<Navigate to="chats" />} />
+         </Routes>
+      </BrowserRouter></Provider>);
+      expect(asFragment(<Chats />)).toMatchSnapshot();
+   });
+
    it('Состояние при переходе на вкладку Чаты', () => {
       render(<Provider store={store}><BrowserRouter>
          <Routes>

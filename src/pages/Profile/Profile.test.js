@@ -11,6 +11,15 @@ describe('Profile', () => {
       expect(Profile).toBeInstanceOf(Function);
    });
 
+   it('Снимок состояния', () => {
+      const { asFragment } = render(<Provider store={store}><BrowserRouter>
+         <Routes>
+            <Route path="/" element={<Profile />} />
+         </Routes>
+      </BrowserRouter></Provider>);
+      expect(asFragment(<Profile />)).toMatchSnapshot();
+   });
+
    it('Состояние при старте', () => {
       render(<Provider store={store}><BrowserRouter>
          <Routes>

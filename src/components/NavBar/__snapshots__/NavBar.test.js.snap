@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NavBar Снимок состояния 1`] = `
+<DocumentFragment>
+  <ul
+    class="navbar"
+  >
+    <li>
+      <a
+        aria-current="page"
+        class="active"
+        data-testid="NavLink-1"
+        href="/"
+      >
+        Профиль
+      </a>
+    </li>
+    <li>
+      <a
+        class=""
+        data-testid="NavLink-2"
+        href="/chats"
+      >
+        Чаты
+      </a>
+    </li>
+  </ul>
+</DocumentFragment>
+`;

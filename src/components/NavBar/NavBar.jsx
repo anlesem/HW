@@ -22,7 +22,10 @@ export const NavBar = () => {
          {navigate.map((link) => {
             return (
                <li key={link.id}>
-                  <NavLink to={link.to} className={({ isActive }) => isActive ? style.active : ''}>
+                  <NavLink
+                     to={link.to}
+                     className={({ isActive }) => isActive ? style.active : ''}
+                     data-testid={`NavLink-${link.id}`}>
                      {link.name}
                   </NavLink>
                </li>
