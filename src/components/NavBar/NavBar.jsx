@@ -1,4 +1,3 @@
-import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 import style from './NavBar.module.scss';
@@ -7,12 +6,12 @@ const navigate = [
    {
       id: 1,
       to: '/',
-      name: 'Профиль',
+      name: 'Профиль'
    },
    {
       id: 2,
       to: '/chats',
-      name: 'Чаты',
+      name: 'Чаты'
    }
 ];
 
@@ -24,7 +23,9 @@ export const NavBar = () => {
                <li key={link.id}>
                   <NavLink
                      to={link.to}
-                     className={({ isActive }) => isActive ? style.active : ''}
+                     className={({ isActive }) =>
+                        isActive ? style.active : ''
+                     }
                      data-testid={`NavLink-${link.id}`}>
                      {link.name}
                   </NavLink>

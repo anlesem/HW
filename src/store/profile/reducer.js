@@ -4,28 +4,28 @@ const initialState = {
    visible: false,
    input: '',
    name: 'user'
-}
+};
 
 export const profileReducer = (state = initialState, Action) => {
    switch (Action.type) {
       case TOGGLE_PROFILE:
          return {
             ...state,
-            visible: !state.visible,
+            visible: !state.visible
          };
       case INPUT_NAME:
          return {
             ...state,
-            input: Action.value,
+            input: Action.value
          };
       case CHANGE_NAME:
          return {
             ...state,
             name: state.input,
             input: '',
-            visible: !state.visible,
+            visible: !state.visible
          };
       default:
          return state;
    }
-}
+};

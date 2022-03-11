@@ -11,35 +11,41 @@ import { NotFound } from '../NotFound/NotFound';
 import { Footer } from '../../components/Footer/Footer';
 
 // const Chats = React.lazy(() => import('../Chats/Chats'));
-const Chats = React.lazy(() => import('../Chats/Chats').then((module) => ({ default: module.Chats, })));
+const Chats = React.lazy(() =>
+  import('../Chats/Chats').then((module) => ({ default: module.Chats }))
+);
 
 export default function App() {
-	const lesson = 'Урок 5';
+  const lesson = 'Урок 5';
 
-	return (
-		<div className={style.root}>
-			<Provider store={store}>
-				<BrowserRouter>
-					<Header lesson={lesson} />
-					<Routes>
-						<Route path="/" element={<Profile />} />
-						<Route path="chats" element={
-							<React.Suspense fallback={<>...</>}>
-								<Chats />
-							</React.Suspense>
-						} />
-						<Route path="chats/:chatId" element={
-							<React.Suspense fallback={<>...</>}>
-								<Chats />
-							</React.Suspense>
-						} />
-						<Route path="*" element={<NotFound />} />
-					</Routes>
-				</BrowserRouter>
-				<Footer />
-			</Provider>
-		</div>
-	);
+  return (
+    <div className={style.root}>
+      <Provider store={store}>
+        <BrowserRouter>
+          <Header lesson={lesson} />
+          <Routes>
+            <Route path="/" element={<Profile />} />
+            <Route
+              path="chats"
+              element={
+                <React.Suspense fallback={<>...</>}>
+                  <Chats />
+                </React.Suspense>
+              }
+            />
+            <Route
+              path="chats/:chatId"
+              element={
+                <React.Suspense fallback={<>...</>}>
+                  <Chats />
+                </React.Suspense>
+              }
+            />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+        <Footer />
+      </Provider>
+    </div>
+  );
 }
-
-

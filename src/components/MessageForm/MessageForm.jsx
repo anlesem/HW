@@ -18,31 +18,31 @@ export const MessageForm = ({ formData }) => {
          setText('');
          arrTextInput('');
       }
-   }
+   };
 
    const handleInput = (value) => {
       setText(value);
       arrTextInput(value);
-   }
+   };
 
    const handleKeyDown = (event) => {
       if (event.keyCode === 13 && !event.shiftKey) {
          event.preventDefault();
          handleSubmit(event);
       }
-   }
+   };
 
    const arrTextInput = (value) => {
       let update = [...textInput];
       update[formData.chatId] = value;
       setTextInput(update);
-   }
+   };
 
    useEffect(() => {
-      if (textInput[formData.chatId] || textInput[formData.chatId] === '') setText(textInput[formData.chatId]);
+      if (textInput[formData.chatId] || textInput[formData.chatId] === '')
+         setText(textInput[formData.chatId]);
       else setText('');
    }, [formData.chatId, textInput]);
-
 
    useEffect(() => {
       focusForm.current.focus();
@@ -54,23 +54,24 @@ export const MessageForm = ({ formData }) => {
             id="outlined-multiline-static"
             name="text"
             label="Текст сообщения"
-            multiline rows={2}
+            multiline
+            rows={2}
             value={text}
-            onChange={event => handleInput(event.target.value)}
-            onKeyDown={event => handleKeyDown(event)}
+            onChange={(event) => handleInput(event.target.value)}
+            onKeyDown={(event) => handleKeyDown(event)}
             inputRef={focusForm}
             disabled={formData.chatId > 0 ? false : true}
             required
-            inputProps={{ "data-testid": "message-form-input" }}
+            inputProps={{ 'data-testid': 'message-form-input' }}
             className={style.textField}
          />
          <Button
             variant="outlined"
             type="submit"
             disabled={formData.chatId > 0 ? false : true}
-            data-testid='message-form-button'>
+            data-testid="message-form-button">
             <SendIcon />
          </Button>
       </form>
    );
-}
+};
