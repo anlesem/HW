@@ -1,6 +1,8 @@
 import { useRef, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
+
 import { toggleVisible, inputName, changeName } from '../../store/profile/actions';
+import { getProfileVisible, getProfileInput, getProfileName } from '../../store/profile/selectors';
 
 import style from './Profile.module.scss';
 
@@ -11,7 +13,9 @@ import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 
 export const Profile = () => {
-  const { visible, input, name } = useSelector((state) => state);
+  const visible = useSelector(getProfileVisible, shallowEqual);
+  const input = useSelector(getProfileInput, shallowEqual);
+  const name = useSelector(getProfileName, shallowEqual);
   const dispatch = useDispatch();
   const focusForm = useRef(null);
 

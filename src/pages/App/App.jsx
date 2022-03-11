@@ -16,7 +16,7 @@ const Chats = React.lazy(() =>
 );
 
 export default function App() {
-  const lesson = 'Урок 5';
+  const lesson = 'Урок 6';
 
   return (
     <div className={style.root}>

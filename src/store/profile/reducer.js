@@ -11,7 +11,8 @@ export const profileReducer = (state = initialState, Action) => {
     case TOGGLE_PROFILE:
       return {
         ...state,
-        visible: !state.visible
+        visible: !state.visible,
+        input: ''
       };
     case INPUT_NAME:
       return {
