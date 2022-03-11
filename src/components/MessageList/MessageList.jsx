@@ -12,9 +12,8 @@ export const MessageList = ({ message }) => {
 
   return (
     <ul className={style.messages} ref={scrollMessages}>
-      {!message
-        ? ''
-        : message.map((item, idx) => {
+      {message &&
+        message.map((item, idx) => {
           return (
             <li key={item.id} className={style.message} data-testid={'list-item-' + idx}>
               <p className={style.message_text}>{item.text}</p>
