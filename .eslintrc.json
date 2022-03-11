@@ -43,6 +43,7 @@
       }
     ],
     "no-tabs": ["error", { "allowIndentationTabs": true }],
-    "no-unexpected-multiline": "error"
+    "no-unexpected-multiline": "error",
+    "space-in-parens": [1, "always"]
   }
 }
