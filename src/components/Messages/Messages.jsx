@@ -1,10 +1,10 @@
 import { useState, useEffect, useCallback } from 'react';
 import { nanoid } from 'nanoid';
 
-import { MessageList } from '../../components/MessageList/MessageList';
+import { MessageList } from '../MessageList/MessageList';
 import { MessageForm } from '../MessageForm/MessageForm';
 
-import style from './Message.module.scss';
+import style from './Messages.module.scss';
 
 const defaultMessages = {
   chat0: [
@@ -23,7 +23,7 @@ const defaultMessages = {
   ]
 };
 
-export const Message = ({ chatId }) => {
+export const Messages = ({ chatId }) => {
   const [messages, setMessages] = useState(defaultMessages);
 
   const sendMassage = useCallback(

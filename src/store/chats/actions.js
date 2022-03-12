@@ -6,11 +6,13 @@ export const addChat = {
   type: ADD_CHAT
 };
 
-export const renameChat = (text) => ({
+export const renameChat = (id, text) => ({
   type: RENAME_CHAT,
+  id: id,
   value: text
 });
 
-export const deleteChat = {
-  type: DELETE_CHAT
-};
+export const deleteChat = (id) => ({
+  type: DELETE_CHAT,
+  id: id
+});

@@ -1,5 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { getChatList } from '../../store/chats/selectors';
+import { addChat, renameChat, deleteChat } from '../../store/chats/actions';
 
 import style from './ChatList.module.scss';
 
@@ -20,7 +24,10 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import SendIcon from '@mui/icons-material/Send';
 import TextField from '@mui/material/TextField';
 
-export const ChatList = ({ chatData }) => {
+export const ChatList = () => {
+  const dispatch = useDispatch();
+
+  const chats = useSelector(getChatList);
   const [text, setText] = useState('');
   const [checked, setChecked] = useState([0]);
   const scrollChats = useRef(null);
@@ -37,7 +44,7 @@ export const ChatList = ({ chatData }) => {
   };
 
   const handleAdd = () => {
-    chatData.addChat();
+    dispatch(addChat);
     scrollChats.current.scrollTop =
       scrollChats.current.scrollHeight - scrollChats.current.clientHeight;
   };
@@ -45,14 +52,16 @@ export const ChatList = ({ chatData }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (text) {
-      chatData.renameChat(checked[1], text);
+      dispatch(renameChat(checked[1], text));
       setText('');
       setChecked([0]);
     }
   };
 
   const handleDelete = (checked) => {
-    chatData.removeChat(checked);
+    checked.forEach((id) => {
+      dispatch(deleteChat(id));
+    });
     setChecked([0]);
   };
 
@@ -77,7 +86,7 @@ export const ChatList = ({ chatData }) => {
         sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
         className={style.chatList}
         ref={scrollChats}>
-        {chatData.chats.map((chat) => {
+        {chats.map((chat) => {
           const labelId = `checkbox-list-label-${chat.id}`;
           return (
             <ListItem

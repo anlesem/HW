@@ -1,64 +1,31 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
-import { ChatList } from '../../components/ChatList/ChatList';
-import { Message } from '../../components/Message/Message';
+import { getProfileName } from '../../store/profile/selectors';
+import { getChatList } from '../../store/chats/selectors';
+import { addChat } from '../../store/chats/actions';
 
 import style from './Chats.module.scss';
 
-const defaultChats = [
-  {
-    id: '1',
-    name: 'чат 1'
-  }
-];
+import { ChatList } from '../../components/ChatList/ChatList';
+import { Messages } from '../../components/Messages/Messages';
 
 export const Chats = () => {
-  const [chats, setChats] = useState(defaultChats);
-  const [counterId, setCounterId] = useState(chats.length);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const name = useSelector(getProfileName);
+  const chats = useSelector(getChatList);
   const [chatIs, setChatIs] = useState(false);
   const { chatId } = useParams();
-  const navigate = useNavigate();
-  const { name } = useSelector((state) => state);
-
-  const addChat = useCallback(() => {
-    setChats((prevChats) => [
-      ...prevChats,
-      {
-        id: `${counterId + 1}`,
-        name: `чат ${counterId + 1}`
-      }
-    ]);
-    setCounterId(counterId + 1);
-  }, [counterId]);
-
-  const renameChat = useCallback(
-    (id, name) => {
-      let update = [...chats];
-      update.find((item) => item.id === `${id}`).name = name;
-      setChats(update);
-    },
-    [chats]
-  );
-
-  const removeChat = useCallback(
-    (checked) => {
-      let update = [...chats];
-      checked.forEach((id) => {
-        update = update.filter((item) => item.id !== `${id}`);
-      });
-      setChats(update);
-    },
-    [chats]
-  );
 
   useEffect(() => {
-    if (chats.length === 0) addChat();
-  }, [addChat, chats, removeChat]);
+    if (chats.length === 0) dispatch(addChat);
+  }, [chats]);
 
   useEffect(() => {
-    if (chats.findIndex((item) => item.id === `${chatId}`) < 0) {
+    if (chats.findIndex((item) => item.id === +chatId) < 0) {
       navigate('/chats');
     } else setChatIs(true);
   }, [chatId, chats, navigate]);
@@ -67,11 +34,11 @@ export const Chats = () => {
     <div className={style.main}>
       <div className={style.chats}>
         Чаты {name}:
-        <ChatList chatData={{ chatId, chats, addChat, removeChat, renameChat }} />
+        <ChatList chatId={chatId} />
       </div>
       <div className={style.messages}>
         Сообщения:
-        {chatId && chatIs ? <Message chatId={chatId} /> : <Message chatId="0" />}
+        {chatId && chatIs ? <Messages chatId={chatId} /> : <Messages chatId="0" />}
       </div>
     </div>
   );
