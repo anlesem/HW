@@ -5,7 +5,8 @@ const initialState = {
   chatList: [
     {
       id: 1,
-      name: 'чат 1'
+      name: 'чат 1',
+      temp: ''
     }
   ]
 };

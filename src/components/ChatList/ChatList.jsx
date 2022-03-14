@@ -2,8 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { getChatList } from '../../store/chats/selectors';
+import { getChatList, getChatCounter } from '../../store/chats/selectors';
 import { addChat, renameChat, deleteChat } from '../../store/chats/actions';
+import { initMessageList, initTempInput } from '../../store/messages/actions';
 
 import style from './ChatList.module.scss';
 
@@ -28,6 +29,7 @@ export const ChatList = () => {
   const dispatch = useDispatch();
 
   const chats = useSelector(getChatList);
+  const counter = useSelector(getChatCounter);
   const [text, setText] = useState('');
   const [checked, setChecked] = useState([0]);
   const scrollChats = useRef(null);
@@ -45,6 +47,8 @@ export const ChatList = () => {
 
   const handleAdd = () => {
     dispatch(addChat);
+    dispatch(initMessageList(counter + 1));
+    dispatch(initTempInput);
     scrollChats.current.scrollTop =
       scrollChats.current.scrollHeight - scrollChats.current.clientHeight;
   };

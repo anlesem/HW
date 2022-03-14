@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { getProfileName } from '../../store/profile/selectors';
 import { getChatList } from '../../store/chats/selectors';
-import { addChat } from '../../store/chats/actions';
 
 import style from './Chats.module.scss';
 
@@ -13,16 +12,11 @@ import { Messages } from '../../components/Messages/Messages';
 
 export const Chats = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const name = useSelector(getProfileName);
   const chats = useSelector(getChatList);
   const [chatIs, setChatIs] = useState(false);
   const { chatId } = useParams();
-
-  useEffect(() => {
-    if (chats.length === 0) dispatch(addChat);
-  }, [chats]);
 
   useEffect(() => {
     if (chats.findIndex((item) => item.id === +chatId) < 0) {

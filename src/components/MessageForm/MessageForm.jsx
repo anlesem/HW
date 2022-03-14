@@ -1,4 +1,8 @@
-import { useState, useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
+
+import { getTempInput } from '../../store/messages/selectors';
+import { changeTempInput } from '../../store/messages/actions';
 
 import style from './MessageForm.module.scss';
 
@@ -7,22 +11,22 @@ import SendIcon from '@mui/icons-material/Send';
 import TextField from '@mui/material/TextField';
 
 export const MessageForm = ({ formData }) => {
-  const [text, setText] = useState('');
-  const [textInput, setTextInput] = useState([]);
+  const dispatch = useDispatch();
+  const tempInput = useSelector(getTempInput, shallowEqual);
   const focusForm = useRef(null);
+  const chatId = +formData.chatId;
+  const input = tempInput[chatId];
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (text) {
-      formData.sendMassage(text);
-      setText('');
-      arrTextInput('');
+    if (input) {
+      formData.sendMassage(input);
+      dispatch(changeTempInput(chatId, ''));
     }
   };
 
   const handleInput = (value) => {
-    setText(value);
-    arrTextInput(value);
+    dispatch(changeTempInput(chatId, value));
   };
 
   const handleKeyDown = (event) => {
@@ -31,18 +35,6 @@ export const MessageForm = ({ formData }) => {
       handleSubmit(event);
     }
   };
-
-  const arrTextInput = (value) => {
-    let update = [...textInput];
-    update[formData.chatId] = value;
-    setTextInput(update);
-  };
-
-  useEffect(() => {
-    if (textInput[formData.chatId] || textInput[formData.chatId] === '')
-      setText(textInput[formData.chatId]);
-    else setText('');
-  }, [formData.chatId, textInput]);
 
   useEffect(() => {
     focusForm.current.focus();
@@ -56,7 +48,7 @@ export const MessageForm = ({ formData }) => {
         label="Текст сообщения"
         multiline
         rows={2}
-        value={text}
+        value={input}
         onChange={(event) => handleInput(event.target.value)}
         onKeyDown={(event) => handleKeyDown(event)}
         inputRef={focusForm}

@@ -1,57 +1,21 @@
-import { useState, useEffect, useCallback } from 'react';
-import { nanoid } from 'nanoid';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { getMessageList } from '../../store/messages/selectors';
+import { addMessage } from '../../store/messages/actions';
 
 import { MessageList } from '../MessageList/MessageList';
 import { MessageForm } from '../MessageForm/MessageForm';
 
 import style from './Messages.module.scss';
 
-const defaultMessages = {
-  chat0: [
-    {
-      id: '0',
-      author: 'BOT',
-      text: 'Выберите чат для отображения сообщений'
-    }
-  ],
-  chat1: [
-    {
-      id: '1',
-      author: 'BOT',
-      text: 'Добро пожаловать в чат №1'
-    }
-  ]
-};
-
 export const Messages = ({ chatId }) => {
-  const [messages, setMessages] = useState(defaultMessages);
+  const dispatch = useDispatch();
+  const messages = useSelector(getMessageList);
 
-  const sendMassage = useCallback(
-    (text, author = 'User', id = nanoid()) => {
-      setMessages((prevMessages) => ({
-        ...prevMessages,
-        [`chat${chatId}`]: [
-          ...prevMessages[`chat${chatId}`],
-          {
-            id: id,
-            author: author,
-            text: text
-          }
-        ]
-      }));
-    },
-    [chatId]
-  );
-
-  useEffect(() => {
-    if (!messages[`chat${chatId}`]) {
-      setMessages((prevMessages) => ({
-        ...prevMessages,
-        [`chat${chatId}`]: []
-      }));
-      sendMassage(`Добро пожаловать в чат №${chatId}`, 'BOT', '1');
-    }
-  }, [chatId, messages, sendMassage]);
+  const sendMassage = (text, author, id) => {
+    dispatch(addMessage(chatId, text, author, id));
+  };
 
   useEffect(() => {
     if (
@@ -64,7 +28,7 @@ export const Messages = ({ chatId }) => {
         clearTimeout(timeout);
       };
     }
-  }, [chatId, messages, sendMassage]);
+  }, [messages, sendMassage]);
 
   return (
     <div className={style.wrap}>
