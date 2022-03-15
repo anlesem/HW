@@ -1,41 +1,55 @@
-import { TOGGLE_PROFILE, INPUT_NAME, CHANGE_NAME } from './actions';
-import { profileReducer } from './reducer';
+import { ADD_CHAT, RENAME_CHAT, DELETE_CHAT } from './actions';
+import { chatsReducer } from './reducer';
 
-describe('profileReducer', () => {
-   it('Reducer существует', () => {
-      expect(profileReducer).toBeInstanceOf(Function);
-   });
+describe('chatsReducer', () => {
+  it('Reducer существует', () => {
+    expect(chatsReducer).toBeInstanceOf(Function);
+  });
 
-   it('При старте Reducer возвращает значение по умолчанию', () => {
-      expect(profileReducer(undefined, {})).toEqual({
-         visible: false,
-         input: '',
-         name: 'user'
-      });
-   });
+  it('При старте Reducer возвращает значение по умолчанию', () => {
+    expect(chatsReducer(undefined, {})).toEqual({
+      counterID: 1,
+      chatList: [
+        {
+          id: 1,
+          name: 'чат 1'
+        }
+      ]
+    });
+  });
 
-   it('При Action = TOGGLE_PROFILE', () => {
-      expect(profileReducer(undefined, { type: TOGGLE_PROFILE })).toEqual({
-         visible: true,
-         input: '',
-         name: 'user'
-      });
-   });
+  it('При Action = TOGGLE_PROFILE', () => {
+    expect(chatsReducer(undefined, { type: ADD_CHAT })).toEqual({
+      counterID: 2,
+      chatList: [
+        {
+          id: 1,
+          name: 'чат 1'
+        },
+        {
+          id: 2,
+          name: 'чат 2'
+        }
+      ]
+    });
+  });
 
-   it('При Action = INPUT_NAME', () => {
-      expect(profileReducer(undefined, { type: INPUT_NAME, value: 'Петя' })).toEqual({
-         visible: false,
-         input: 'Петя',
-         name: 'user'
-      });
-   });
+  it('При Action = RENAME_CHAT', () => {
+    expect(chatsReducer(undefined, { type: RENAME_CHAT, id: 1, value: 'Петя' })).toEqual({
+      counterID: 1,
+      chatList: [
+        {
+          id: 1,
+          name: 'Петя'
+        }
+      ]
+    });
+  });
 
-   it('При Action = CHANGE_NAME', () => {
-      expect(profileReducer({ visible: true, input: 'Петя', name: 'user' },
-         { type: CHANGE_NAME })).toEqual({
-            visible: false,
-            input: '',
-            name: 'Петя'
-         });
-   });
+  it('При Action = DELETE_CHAT', () => {
+    expect(chatsReducer(undefined, { type: DELETE_CHAT, id: 1 })).toEqual({
+      counterID: 1,
+      chatList: []
+    });
+  });
 });
