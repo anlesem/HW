@@ -1,1 +1,1 @@
-export const NotFound = () => <p>NotFound</p>
+export const NotFound = () => <p>NotFound</p>;
