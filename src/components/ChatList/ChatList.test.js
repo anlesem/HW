@@ -10,18 +10,18 @@ describe('ChatList', () => {
     expect(ChatList).toBeInstanceOf(Function);
   });
 
-  // it('Снимок состояния', () => {
-  //   const chatId = 1;
+  it('Снимок состояния', () => {
+    const chatId = 1;
 
-  //   const { asFragment } = render(
-  //     <Provider store={store}>
-  //       <BrowserRouter>
-  //         <ChatList chatData={chatId} />
-  //       </BrowserRouter>
-  //     </Provider>
-  //   );
-  //   expect(asFragment(<ChatList />)).toMatchSnapshot();
-  // });
+    const { asFragment } = render(
+      <Provider store={store}>
+        <BrowserRouter>
+          <ChatList chatData={chatId} />
+        </BrowserRouter>
+      </Provider>
+    );
+    expect(asFragment(<ChatList />)).toMatchSnapshot();
+  });
 
   it('Список чатов', () => {
     const chatId = 1;
