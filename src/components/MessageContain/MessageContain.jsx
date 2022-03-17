@@ -7,9 +7,9 @@ import { addMessage } from '../../store/messages/actions';
 import { MessageList } from '../MessageList/MessageList';
 import { MessageForm } from '../MessageForm/MessageForm';
 
-import style from './Messages.module.scss';
+import style from './MessageContain.module.scss';
 
-export const Messages = ({ chatId }) => {
+export const MessageContain = ({ chatId }) => {
   const dispatch = useDispatch();
   const messages = useSelector(getMessageList);
 
