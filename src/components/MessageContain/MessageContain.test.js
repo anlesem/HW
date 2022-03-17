@@ -10,17 +10,17 @@ describe('MessageContain', () => {
   });
 
   it('Снимок состояния', () => {
-    const chatId = 1;
+    const chatId = '1';
     const { asFragment } = render(
       <Provider store={store}>
         <MessageContain chatId={chatId} />
       </Provider>
     );
-    expect(asFragment(<MessageContain />)).toMatchSnapshot();
+    expect(asFragment(<MessageContain chatId={chatId} />)).toMatchSnapshot();
   });
 
   it('Отображает приветственное сообщение', () => {
-    const chatId = 1;
+    const chatId = '1';
     render(
       <Provider store={store}>
         <MessageContain chatId={chatId} />

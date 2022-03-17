@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 
 import style from './ChatForm.module.scss';
 
@@ -51,4 +52,11 @@ export const ChatForm = ({ data }) => {
       </Button>
     </form>
   );
+};
+
+ChatForm.propTypes = {
+  data: PropTypes.shape({
+    checked: PropTypes.array.isRequired,
+    changeNameChat: PropTypes.func.isRequired
+  })
 };

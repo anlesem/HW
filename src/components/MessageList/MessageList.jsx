@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 
 import style from './MessageList.module.scss';
 
@@ -23,4 +24,8 @@ export const MessageList = ({ message }) => {
         })}
     </ul>
   );
+};
+
+MessageList.propTypes = {
+  message: PropTypes.array.isRequired
 };

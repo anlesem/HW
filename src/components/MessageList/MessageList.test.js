@@ -15,7 +15,7 @@ describe('MessageList', () => {
       }
     ];
     const { asFragment } = render(<MessageList message={message} />);
-    expect(asFragment(<MessageList />)).toMatchSnapshot();
+    expect(asFragment(<MessageList message={message} />)).toMatchSnapshot();
   });
 
   it('Изначально список сообщений существует, но пустой', () => {

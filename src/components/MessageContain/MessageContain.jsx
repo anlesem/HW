@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import { getMessageList } from '../../store/messages/selectors';
 import { addMessageThunk } from '../../store/messages/actions';
@@ -23,7 +24,11 @@ export const MessageContain = ({ chatId }) => {
   return (
     <div className={style.wrap}>
       <MessageList message={messages[`chat${chatId}`]} />
-      <MessageForm formData={{ chatId, sendMassage }} />
+      <MessageForm data={{ chatId, sendMassage }} />
     </div>
   );
+};
+
+MessageContain.propTypes = {
+  chatId: PropTypes.string.isRequired
 };

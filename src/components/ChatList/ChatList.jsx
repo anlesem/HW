@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import style from './ChatList.module.scss';
 
@@ -56,4 +57,13 @@ export const ChatList = ({ data }) => {
       })}
     </List>
   );
+};
+
+ChatList.propTypes = {
+  data: PropTypes.shape({
+    chats: PropTypes.array.isRequired,
+    checked: PropTypes.array.isRequired,
+    handleToggle: PropTypes.func.isRequired,
+    scrollChats: PropTypes.object
+  })
 };

@@ -23,7 +23,6 @@
   "rules": {
     "indent": "off",
     "react/prop-types": 0,
-    "linebreak-style": ["warn", "unix"],
     "quotes": ["warn", "single"],
     "semi": ["warn", "always"],
     "prettier/prettier": [
@@ -42,9 +41,6 @@
         "arrowParens": "always",
         "endOfLine": "auto"
       }
-    ],
-    "no-tabs": ["error", { "allowIndentationTabs": true }],
-    "no-unexpected-multiline": "error",
-    "space-in-parens": [1, "always"]
+    ]
   }
 }

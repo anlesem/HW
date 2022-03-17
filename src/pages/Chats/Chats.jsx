@@ -27,7 +27,7 @@ export const Chats = () => {
     <div className={style.main}>
       <div className={style.chats}>
         Чаты {name}:
-        <ChatContain chatId={chatId} />
+        <ChatContain />
       </div>
       <div className={style.messages}>
         Сообщения:

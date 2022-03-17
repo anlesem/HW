@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import style from './ChatButtons.module.scss';
 
 import Stack from '@mui/material/Stack';
@@ -25,4 +27,12 @@ export const ChatButtons = ({ data }) => {
       </Button>
     </Stack>
   );
+};
+
+ChatButtons.propTypes = {
+  data: PropTypes.shape({
+    checked: PropTypes.array.isRequired,
+    handleAdd: PropTypes.func.isRequired,
+    handleDelete: PropTypes.func.isRequired
+  })
 };
