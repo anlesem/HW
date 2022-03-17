@@ -52,4 +52,19 @@ describe('ChatForm', () => {
     expect(changeNameChat).toBeCalled();
     expect(input.value).toBe('');
   });
+
+  it('Обработка нажатия на Enter', () => {
+    const changeNameChat = jest.fn();
+    const checked = [];
+    render(<ChatForm data={{ changeNameChat, checked }} />);
+
+    const input = screen.getByTestId('chat-form-input');
+
+    fireEvent.change(input, { target: { value: 'bla-bla-bla' } });
+    expect(input.value).toBe('bla-bla-bla');
+
+    fireEvent.keyDown(input, { key: 'enter', keyCode: 13 });
+    expect(changeNameChat).toBeCalled();
+    expect(input.value).toBe('');
+  });
 });
