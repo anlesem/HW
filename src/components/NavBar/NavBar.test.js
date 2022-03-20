@@ -4,19 +4,27 @@ import { render, screen } from '@testing-library/react';
 import { NavBar } from './NavBar';
 
 describe('NavBar', () => {
-   it('Компонент существует', () => {
-      expect(NavBar).toBeInstanceOf(Function);
-   });
+  it('Компонент существует', () => {
+    expect(NavBar).toBeInstanceOf(Function);
+  });
 
-   it('Снимок состояния', () => {
-      const { asFragment } = render(<BrowserRouter><NavBar /></BrowserRouter>);
-      expect(asFragment(<NavBar />)).toMatchSnapshot();
-   });
+  it('Снимок состояния', () => {
+    const { asFragment } = render(
+      <BrowserRouter>
+        <NavBar />
+      </BrowserRouter>
+    );
+    expect(asFragment(<NavBar />)).toMatchSnapshot();
+  });
 
-   it('Изначально список сообщений существует, но пустой', () => {
-      render(<BrowserRouter><NavBar /></BrowserRouter>);
+  it('Изначально список сообщений существует, но пустой', () => {
+    render(
+      <BrowserRouter>
+        <NavBar />
+      </BrowserRouter>
+    );
 
-      expect(screen.getByRole('list')).toBeTruthy();
-      expect(screen.getAllByRole('listitem')).toHaveLength(2);
-   });
+    expect(screen.getByRole('list')).toBeTruthy();
+    expect(screen.getAllByRole('listitem')).toHaveLength(2);
+  });
 });

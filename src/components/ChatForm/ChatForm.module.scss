@@ -1,0 +1,18 @@
+.rename {
+  position: absolute;
+  top: 5px;
+  width: 100%;
+  background-color: #fff;
+  margin-bottom: 20px;
+
+  display: flex;
+  justify-content: space-between;
+
+  button {
+    margin-left: 10px;
+  }
+}
+
+.textField {
+  flex-grow: 1;
+}

@@ -11,13 +11,36 @@ export const initMessageList = (chatId) => ({
   chatId: chatId
 });
 
-export const addMessage = (chatId, text, author = 'User', id = nanoid()) => ({
+export const addMessage = (message) => ({
   type: ADD_MESSAGE,
-  chatId: chatId,
-  id: id,
-  author: author,
-  text: text
+  chatId: message.chatId,
+  id: nanoid(),
+  author: message.author,
+  text: message.text
 });
+
+let timerId;
+
+export const addMessageThunk = (message) => (dispatch) => {
+  dispatch(addMessage(message));
+
+  if (message.author !== 'BOT') {
+    if (timerId) {
+      clearTimeout(timerId);
+    }
+    timerId = setTimeout(
+      () =>
+        dispatch(
+          addMessage({
+            chatId: message.chatId,
+            text: 'I am bot',
+            author: 'BOT'
+          })
+        ),
+      1000
+    );
+  }
+};
 
 export const initTempInput = {
   type: INIT_TEMP_INPUT
