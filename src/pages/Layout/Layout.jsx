@@ -5,11 +5,11 @@ import style from './Layout.module.scss';
 import { Header } from '../../components/Header/Header';
 import { Footer } from '../../components/Footer/Footer';
 
-export const Layout = ({ lesson }) => {
+export const Layout = () => {
   return (
     <div className={style.wrap}>
       <header className={style.header}>
-        <Header lesson={lesson} />
+        <Header />
       </header>
       <main className={style.main}>
         <Outlet />

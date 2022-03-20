@@ -16,15 +16,13 @@ const Chats = React.lazy(() =>
 );
 
 export default function App() {
-  const lesson = 'Урок 7';
-
   return (
     <div className={style.root}>
       <Provider store={store}>
         <PersistGate persistor={persistor}>
           <BrowserRouter>
             <Routes>
-              <Route path="/" element={<Layout lesson={lesson} />}>
+              <Route path="/" element={<Layout />}>
                 <Route index element={<Profile />} />
                 <Route
                   path="chats"
