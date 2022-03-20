@@ -6,10 +6,9 @@ import { persistor, store } from '../../store/store';
 
 import style from './App.module.scss';
 
-import { Header } from '../../components/Header/Header';
+import { Layout } from '../Layout/Layout';
 import { Profile } from '../Profile/Profile';
 import { NotFound } from '../NotFound/NotFound';
-import { Footer } from '../../components/Footer/Footer';
 
 // const Chats = React.lazy(() => import('../Chats/Chats'));
 const Chats = React.lazy(() =>
@@ -24,29 +23,29 @@ export default function App() {
       <Provider store={store}>
         <PersistGate persistor={persistor}>
           <BrowserRouter>
-            <Header lesson={lesson} />
             <Routes>
-              <Route path="/" element={<Profile />} />
-              <Route
-                path="chats"
-                element={
-                  <React.Suspense fallback={<>...</>}>
-                    <Chats />
-                  </React.Suspense>
-                }
-              />
-              <Route
-                path="chats/:chatId"
-                element={
-                  <React.Suspense fallback={<>...</>}>
-                    <Chats />
-                  </React.Suspense>
-                }
-              />
-              <Route path="*" element={<NotFound />} />
+              <Route path="/" element={<Layout lesson={lesson} />}>
+                <Route index element={<Profile />} />
+                <Route
+                  path="chats"
+                  element={
+                    <React.Suspense fallback={<>...</>}>
+                      <Chats />
+                    </React.Suspense>
+                  }
+                />
+                <Route
+                  path="chats/:chatId"
+                  element={
+                    <React.Suspense fallback={<>...</>}>
+                      <Chats />
+                    </React.Suspense>
+                  }
+                />
+                <Route path="*" element={<NotFound />} />
+              </Route>
             </Routes>
           </BrowserRouter>
-          <Footer />
         </PersistGate>
       </Provider>
     </div>

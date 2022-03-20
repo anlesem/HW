@@ -5,97 +5,105 @@ exports[`App Снимок состояния 1`] = `
   <div
     class="root"
   >
-    <header
-      class="header"
-    >
-      <div
-        class="wrap container"
-      >
-        <h1>
-          Урок 7
-        </h1>
-        <ul
-          class="navbar"
-        >
-          <li>
-            <a
-              aria-current="page"
-              class="active"
-              data-testid="NavLink-1"
-              href="/"
-            >
-              Профиль
-            </a>
-          </li>
-          <li>
-            <a
-              class=""
-              data-testid="NavLink-2"
-              href="/chats"
-            >
-              Чаты
-            </a>
-          </li>
-        </ul>
-      </div>
-    </header>
     <div
-      class="main"
+      class="wrap"
     >
-      <h1
-        class="head"
+      <header
+        class="header"
       >
-        user
-      </h1>
-      <label
-        class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-j204z7-MuiFormControlLabel-root"
-        data-testid="profile-box"
-      >
-        <span
-          class="MuiCheckbox-root MuiCheckbox-colorPrimary MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-root css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root"
+        <div
+          class="wrap container"
         >
-          <input
-            class="PrivateSwitchBase-input css-1m9pwf3"
-            data-indeterminate="false"
-            data-testid="profile-check"
-            type="checkbox"
-          />
-          <svg
-            aria-hidden="true"
-            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
-            data-testid="CheckBoxOutlineBlankIcon"
-            focusable="false"
-            viewBox="0 0 24 24"
+          <h1>
+            Урок 7
+          </h1>
+          <ul
+            class="navbar"
           >
-            <path
-              d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
-            />
-          </svg>
-          <span
-            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-          />
-        </span>
-        <span
-          class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-ahj2mt-MuiTypography-root"
-        >
-          Авторизоваться
-        </span>
-      </label>
-    </div>
-    <footer
-      class="footer"
-    >
-      <div
-        class="wrap container"
+            <li>
+              <a
+                aria-current="page"
+                class="active"
+                data-testid="NavLink-1"
+                href="/"
+              >
+                Профиль
+              </a>
+            </li>
+            <li>
+              <a
+                class=""
+                data-testid="NavLink-2"
+                href="/chats"
+              >
+                Чаты
+              </a>
+            </li>
+          </ul>
+        </div>
+      </header>
+      <main
+        class="main"
       >
-        <p
-          class="date"
-          data-testid="footer-paragraph"
+        <div
+          class="main"
         >
-          © 2022
-        </p>
-      </div>
-    </footer>
+          <h1
+            class="head"
+          >
+            user
+          </h1>
+          <label
+            class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-j204z7-MuiFormControlLabel-root"
+            data-testid="profile-box"
+          >
+            <span
+              class="MuiCheckbox-root MuiCheckbox-colorPrimary MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-root css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root"
+            >
+              <input
+                class="PrivateSwitchBase-input css-1m9pwf3"
+                data-indeterminate="false"
+                data-testid="profile-check"
+                type="checkbox"
+              />
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                data-testid="CheckBoxOutlineBlankIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
+                />
+              </svg>
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </span>
+            <span
+              class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-ahj2mt-MuiTypography-root"
+            >
+              Авторизоваться
+            </span>
+          </label>
+        </div>
+      </main>
+      <footer
+        class="footer"
+      >
+        <div
+          class="wrap container"
+        >
+          <p
+            class="date"
+            data-testid="footer-paragraph"
+          >
+            © 2022
+          </p>
+        </div>
+      </footer>
+    </div>
   </div>
 </DocumentFragment>
 `;

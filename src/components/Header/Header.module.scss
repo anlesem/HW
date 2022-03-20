@@ -1,16 +1,10 @@
-.header {
-	width: 100%;
-	height: 100px;
-	background-color: #999;
-
-	h1 {
-		font-size: 24px;
-		font-weight: bold;
-	}
+h1 {
+  font-size: 24px;
+  font-weight: bold;
 }
 
 .wrap {
-	display: grid;
-	place-items: center;
-	height: 100%;
+  display: grid;
+  place-items: center;
+  height: 100%;
 }
