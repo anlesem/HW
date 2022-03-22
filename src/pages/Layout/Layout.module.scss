@@ -11,6 +11,8 @@
 }
 
 .main {
+  max-width: 1000px;
+  margin: 0 auto;
   height: calc(100% - 100px - 40px);
   overflow: hidden;
 }

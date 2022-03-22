@@ -6,17 +6,19 @@ import storage from 'redux-persist/lib/storage';
 import { profileReducer } from './profile/reducer';
 import { chatsReducer } from './chats/reducer';
 import { messagesReducer } from './messages/reducer';
+import { gistsReducer } from './gists/reducer';
 
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['profile']
+  blacklist: ['gists']
 };
 
 const rootReducers = combineReducers({
   profile: profileReducer,
   chats: chatsReducer,
-  messages: messagesReducer
+  messages: messagesReducer,
+  gists: gistsReducer
 });
 
 const persistedReducers = persistReducer(persistConfig, rootReducers);

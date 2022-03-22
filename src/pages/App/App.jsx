@@ -8,6 +8,7 @@ import style from './App.module.scss';
 
 import { Layout } from '../Layout/Layout';
 import { Profile } from '../Profile/Profile';
+import { Gists } from '../Gists/Gists';
 import { NotFound } from '../NotFound/NotFound';
 
 // const Chats = React.lazy(() => import('../Chats/Chats'));
@@ -40,6 +41,7 @@ export default function App() {
                     </React.Suspense>
                   }
                 />
+                <Route path="gists" element={<Gists />} />
                 <Route path="*" element={<NotFound />} />
               </Route>
             </Routes>
