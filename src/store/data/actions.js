@@ -1,14 +1,14 @@
 import { GLOBAL } from '../../GlobalData';
 
-export const GET_DATA = 'DATA::GET_DATA';
+// export const GET_DATA = 'DATA::GET_DATA';
 export const GET_ALL_DATA = 'DATA::GET_ALL_DATA';
 export const TOGGLE_LOAD = 'DATA::TOGGLE_LOAD';
 export const SET_ERROR = 'DATA::SET_ERROR';
 
-export const getData = (payload) => ({
-  type: GET_DATA,
-  payload
-});
+// export const getData = (payload) => ({
+//   type: GET_DATA,
+//   payload
+// });
 
 export const getDataAll = (payload) => ({
   type: GET_ALL_DATA,

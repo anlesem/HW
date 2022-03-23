@@ -25,6 +25,6 @@ describe('NavBar', () => {
     );
 
     expect(screen.getByRole('list')).toBeTruthy();
-    expect(screen.getAllByRole('listitem')).toHaveLength(2);
+    expect(screen.getAllByRole('listitem')).toHaveLength(3);
   });
 });

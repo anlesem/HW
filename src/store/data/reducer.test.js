@@ -1,42 +1,42 @@
-import { TOGGLE_PROFILE, INPUT_NAME, CHANGE_NAME } from './actions';
-import { profileReducer } from './reducer';
+import { GET_ALL_DATA, TOGGLE_LOAD, SET_ERROR } from './actions';
+import { dataReducer } from './reducer';
 
-describe('profileReducer', () => {
+describe('dataReducer', () => {
   it('Reducer существует', () => {
-    expect(profileReducer).toBeInstanceOf(Function);
+    expect(dataReducer).toBeInstanceOf(Function);
   });
 
   it('При старте Reducer возвращает значение по умолчанию', () => {
-    expect(profileReducer(undefined, {})).toEqual({
-      visible: false,
-      input: '',
-      name: 'user'
+    expect(dataReducer(undefined, {})).toEqual({
+      data: [],
+      onLoad: false,
+      error: false
     });
   });
 
-  it('При Action = TOGGLE_PROFILE', () => {
-    expect(profileReducer(undefined, { type: TOGGLE_PROFILE })).toEqual({
-      visible: true,
-      input: '',
-      name: 'user'
+  it('При Action = GET_ALL_DATA', () => {
+    expect(dataReducer(undefined, { type: GET_ALL_DATA, payload: [{ id: 1 }, { id: 2 }] })).toEqual(
+      {
+        data: [{ id: 1 }, { id: 2 }],
+        onLoad: false,
+        error: false
+      }
+    );
+  });
+
+  it('При Action = TOGGLE_LOAD', () => {
+    expect(dataReducer(undefined, { type: TOGGLE_LOAD })).toEqual({
+      data: [],
+      onLoad: true,
+      error: false
     });
   });
 
-  it('При Action = INPUT_NAME', () => {
-    expect(profileReducer(undefined, { type: INPUT_NAME, value: 'Петя' })).toEqual({
-      visible: false,
-      input: 'Петя',
-      name: 'user'
-    });
-  });
-
-  it('При Action = CHANGE_NAME', () => {
-    expect(
-      profileReducer({ visible: true, input: 'Петя', name: 'user' }, { type: CHANGE_NAME })
-    ).toEqual({
-      visible: false,
-      input: '',
-      name: 'Петя'
+  it('При Action = SET_ERROR', () => {
+    expect(dataReducer(undefined, { type: SET_ERROR, status: true })).toEqual({
+      data: [],
+      onLoad: false,
+      error: true
     });
   });
 });

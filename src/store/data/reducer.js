@@ -1,4 +1,4 @@
-import { GET_ALL_DATA, GET_DATA, TOGGLE_LOAD, SET_ERROR } from './actions';
+import { GET_ALL_DATA, TOGGLE_LOAD, SET_ERROR } from './actions';
 
 const initialState = {
   data: [],
@@ -13,11 +13,11 @@ export const dataReducer = (state = initialState, Action) => {
         ...state,
         data: Action.payload
       };
-    case GET_DATA:
-      return {
-        ...state,
-        data: [...state.data, Action.payload]
-      };
+    // case GET_DATA:
+    //   return {
+    //     ...state,
+    //     data: [...state.data, Action.payload]
+    //   };
     case TOGGLE_LOAD:
       return {
         ...state,
