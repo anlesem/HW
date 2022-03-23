@@ -8,7 +8,9 @@ import style from './App.module.scss';
 
 import { Layout } from '../Layout/Layout';
 import { Profile } from '../Profile/Profile';
+import { Data } from '../Data/Data';
 import { NotFound } from '../NotFound/NotFound';
+import { ProgressBar } from '../../components/ProgressBar/ProgressBar';
 
 // const Chats = React.lazy(() => import('../Chats/Chats'));
 const Chats = React.lazy(() =>
@@ -16,20 +18,18 @@ const Chats = React.lazy(() =>
 );
 
 export default function App() {
-  const lesson = 'Урок 7';
-
   return (
     <div className={style.root}>
       <Provider store={store}>
         <PersistGate persistor={persistor}>
           <BrowserRouter>
             <Routes>
-              <Route path="/" element={<Layout lesson={lesson} />}>
+              <Route path="/" element={<Layout />}>
                 <Route index element={<Profile />} />
                 <Route
                   path="chats"
                   element={
-                    <React.Suspense fallback={<>...</>}>
+                    <React.Suspense fallback={<ProgressBar />}>
                       <Chats />
                     </React.Suspense>
                   }
@@ -37,11 +37,12 @@ export default function App() {
                 <Route
                   path="chats/:chatId"
                   element={
-                    <React.Suspense fallback={<>...</>}>
+                    <React.Suspense fallback={<ProgressBar />}>
                       <Chats />
                     </React.Suspense>
                   }
                 />
+                <Route path="data" element={<Data />} />
                 <Route path="*" element={<NotFound />} />
               </Route>
             </Routes>

@@ -29,7 +29,7 @@ describe('App', () => {
     const navLink2 = screen.getByTestId('NavLink-2');
 
     fireEvent.click(navLink2);
-    expect(screen.getByText('...')).toBeTruthy();
+    expect(screen.getByTestId('progress')).toBeTruthy();
 
     fireEvent.click(navLink1);
     expect(screen.getByText(/авторизоваться/i)).toBeTruthy();

@@ -15,7 +15,7 @@ exports[`App Снимок состояния 1`] = `
           class="wrap container"
         >
           <h1>
-            Урок 7
+            Урок 8
           </h1>
           <ul
             class="navbar"
@@ -37,6 +37,15 @@ exports[`App Снимок состояния 1`] = `
                 href="/chats"
               >
                 Чаты
+              </a>
+            </li>
+            <li>
+              <a
+                class=""
+                data-testid="NavLink-3"
+                href="/data"
+              >
+                Данные
               </a>
             </li>
           </ul>

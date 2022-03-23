@@ -1,18 +1,13 @@
-import PropTypes from 'prop-types';
-
+import { GLOBAL } from '../../GlobalData';
 import style from './Header.module.scss';
 
 import { NavBar } from '../../components/NavBar/NavBar';
 
-export const Header = ({ lesson }) => {
+export const Header = () => {
   return (
     <div className={style.wrap + ' container'}>
-      <h1>{lesson}</h1>
+      <h1>{GLOBAL.lesson}</h1>
       <NavBar />
     </div>
   );
-};
-
-Header.propTypes = {
-  lesson: PropTypes.string.isRequired
 };

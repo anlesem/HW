@@ -24,6 +24,15 @@ exports[`NavBar Снимок состояния 1`] = `
         Чаты
       </a>
     </li>
+    <li>
+      <a
+        class=""
+        data-testid="NavLink-3"
+        href="/data"
+      >
+        Данные
+      </a>
+    </li>
   </ul>
 </DocumentFragment>
 `;

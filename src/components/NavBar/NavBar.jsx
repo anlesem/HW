@@ -12,6 +12,11 @@ const navigate = [
     id: 2,
     to: '/chats',
     name: 'Чаты'
+  },
+  {
+    id: 3,
+    to: '/data',
+    name: 'Данные'
   }
 ];
 
