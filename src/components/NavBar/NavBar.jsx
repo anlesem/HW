@@ -15,7 +15,7 @@ const navigate = [
   },
   {
     id: 3,
-    to: '/gists',
+    to: '/data',
     name: 'Данные'
   }
 ];
