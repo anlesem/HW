@@ -1,8 +1,13 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { getChatList, getChatCounter } from '../../store/chats/selectors';
-import { addChat, renameChat, deleteChat } from '../../store/chats/actions';
+import {
+  addChatThunk,
+  renameChatThunk,
+  deleteChatThunk,
+  initChatsDataThunk
+} from '../../store/chats/actions';
 import { initMessageList, initTempInput } from '../../store/messages/actions';
 
 import style from './ChatContain.module.scss';
@@ -30,7 +35,7 @@ export const ChatContain = () => {
   };
 
   const handleAdd = () => {
-    dispatch(addChat);
+    dispatch(addChatThunk(counter + 1));
     dispatch(initMessageList(counter + 1));
     dispatch(initTempInput);
     scrollChats.current.scrollTop =
@@ -39,15 +44,19 @@ export const ChatContain = () => {
 
   const handleDelete = (checked) => {
     checked.forEach((id) => {
-      dispatch(deleteChat(id));
+      dispatch(deleteChatThunk(id));
     });
     setChecked([0]);
   };
 
   const changeNameChat = (text) => {
-    dispatch(renameChat(checked[1], text));
+    dispatch(renameChatThunk(checked[1], text));
     setChecked([0]);
   };
+
+  useEffect(() => {
+    dispatch(initChatsDataThunk());
+  }, []);
 
   return (
     <div className={style.wrap}>
