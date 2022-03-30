@@ -11,7 +11,7 @@ import { NotFound } from '../NotFound/NotFound';
 import { ProgressBar } from '../../components/ProgressBar/ProgressBar';
 import { Sign } from '../Sign/Sign';
 import { auth } from '../../services/firebase';
-import { changeName, toggleLogin } from '../../store/profile/actions';
+import { changeLogin, toggleAuth } from '../../store/profile/actions';
 
 // const Chats = React.lazy(() => import('../Chats/Chats'));
 const Chats = React.lazy(() =>
@@ -24,11 +24,11 @@ export default function App() {
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {
-        dispatch(toggleLogin(true));
-        dispatch(changeName(user.email));
+        dispatch(toggleAuth(true));
+        dispatch(changeLogin(user.email));
       } else {
-        dispatch(toggleLogin(false));
-        dispatch(changeName('user'));
+        dispatch(toggleAuth(false));
+        dispatch(changeLogin('email'));
       }
     });
   }, []);
