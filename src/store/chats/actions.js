@@ -67,7 +67,6 @@ export const setChatsDataThunk = () => (dispatch) => {
 };
 
 export const unsetChatsDataThunk = () => (dispatch) => {
-  const offChats = [];
-  dispatch(setChat(offChats));
+  dispatch(setChat([]));
   dispatch(changeCounterId(0));
 };

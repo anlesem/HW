@@ -23,8 +23,8 @@ export const MessageContain = ({ chatId }) => {
 
   return (
     <div className={style.wrap}>
-      <MessageList message={messages[`chat${chatId}`]} />
-      <MessageForm data={{ chatId, sendMassage }} />
+      {messages[chatId] && <MessageList message={messages[chatId]} />}
+      {messages[chatId] && <MessageForm data={{ chatId, sendMassage }} />}
     </div>
   );
 };

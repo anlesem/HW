@@ -9,12 +9,7 @@ import {
   getProfileAuth,
   getProfileVisible
 } from '../../store/profile/selectors';
-import {
-  changeName,
-  changeNameThunk,
-  initProfileDataThunk,
-  toggleVisible
-} from '../../store/profile/actions';
+import { changeName, changeNameThunk, toggleVisible } from '../../store/profile/actions';
 
 import style from './Profile.module.scss';
 
@@ -51,10 +46,6 @@ export const Profile = () => {
   const handleCheck = () => {
     dispatch(toggleVisible);
   };
-
-  useEffect(() => {
-    dispatch(initProfileDataThunk());
-  }, []);
 
   useEffect(() => {
     if (focusForm.current) focusForm.current.focus();
