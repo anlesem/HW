@@ -12,6 +12,7 @@ import { ProgressBar } from '../../components/ProgressBar/ProgressBar';
 import { Sign } from '../Sign/Sign';
 import { auth } from '../../services/firebase';
 import { changeLogin, toggleAuth } from '../../store/profile/actions';
+import { setChatsDataThunk, unsetChatsDataThunk } from '../../store/chats/actions';
 
 // const Chats = React.lazy(() => import('../Chats/Chats'));
 const Chats = React.lazy(() =>
@@ -26,9 +27,11 @@ export default function App() {
       if (user) {
         dispatch(toggleAuth(true));
         dispatch(changeLogin(user.email));
+        dispatch(setChatsDataThunk());
       } else {
         dispatch(toggleAuth(false));
         dispatch(changeLogin('email'));
+        dispatch(unsetChatsDataThunk());
       }
     });
   }, []);

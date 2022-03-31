@@ -35,7 +35,7 @@ export const addChatThunk = (id) => () => {
     id,
     name: `чат ${id}`
   });
-  initChatsDataThunk();
+  setChatsDataThunk();
 };
 
 export const renameChatThunk = (id, text) => (dispatch) => {
@@ -52,10 +52,10 @@ export const renameChatThunk = (id, text) => (dispatch) => {
 
 export const deleteChatThunk = (id) => () => {
   remove(getChatListById(id));
-  initChatsDataThunk();
+  setChatsDataThunk();
 };
 
-export const initChatsDataThunk = () => (dispatch) => {
+export const setChatsDataThunk = () => (dispatch) => {
   onValue(chatsRef, (snapshot) => {
     const newChats = [];
     snapshot.forEach((shot) => {
@@ -64,4 +64,10 @@ export const initChatsDataThunk = () => (dispatch) => {
     dispatch(setChat(newChats));
     dispatch(changeCounterId(snapshot.val().counterId));
   });
+};
+
+export const unsetChatsDataThunk = () => (dispatch) => {
+  const offChats = [];
+  dispatch(setChat(offChats));
+  dispatch(changeCounterId(0));
 };

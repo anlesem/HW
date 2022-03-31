@@ -1,13 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { getChatList, getChatCounter } from '../../store/chats/selectors';
-import {
-  addChatThunk,
-  renameChatThunk,
-  deleteChatThunk,
-  initChatsDataThunk
-} from '../../store/chats/actions';
+import { addChatThunk, renameChatThunk, deleteChatThunk } from '../../store/chats/actions';
 import { initMessageList, initTempInput } from '../../store/messages/actions';
 
 import style from './ChatContain.module.scss';
@@ -53,10 +48,6 @@ export const ChatContain = () => {
     dispatch(renameChatThunk(checked[1], text));
     setChecked([0]);
   };
-
-  useEffect(() => {
-    dispatch(initChatsDataThunk());
-  }, []);
 
   return (
     <div className={style.wrap}>
