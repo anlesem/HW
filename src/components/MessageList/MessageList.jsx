@@ -17,7 +17,7 @@ export const MessageList = ({ message }) => {
         message.map((item, idx) => {
           if (item) {
             return (
-              <li key={item.id} className={style.message} data-testid={'list-item-' + idx}>
+              <li key={idx} className={style.message} data-testid={'list-item-' + idx}>
                 <p className={style.message_text}>{item.text}</p>
                 <p className={style.message_author}>{item.author}</p>
               </li>

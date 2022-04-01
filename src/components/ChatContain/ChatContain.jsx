@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { getChatList, getChatCounter } from '../../store/chats/selectors';
 import { addChatThunk, renameChatThunk, deleteChatThunk } from '../../store/chats/actions';
-import { initMessageListThunk } from '../../store/messages/actions';
+import { initMessageThunk } from '../../store/messages/actions';
 
 import style from './ChatContain.module.scss';
 
@@ -31,7 +31,7 @@ export const ChatContain = () => {
 
   const handleAdd = () => {
     dispatch(addChatThunk(counter + 1));
-    dispatch(initMessageListThunk(counter + 1));
+    dispatch(initMessageThunk(counter + 1));
     scrollChats.current.scrollTop =
       scrollChats.current.scrollHeight - scrollChats.current.clientHeight;
   };

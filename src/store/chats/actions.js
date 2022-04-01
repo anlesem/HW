@@ -62,7 +62,7 @@ export const setChatsDataThunk = () => (dispatch) => {
       if (shot.val().id) newChats.push(shot.val());
     });
     dispatch(setChat(newChats));
-    dispatch(changeCounterId(snapshot.val().counterId));
+    if (snapshot.val()) dispatch(changeCounterId(snapshot.val().counterId));
   });
 };
 

@@ -5,23 +5,23 @@ const initialState = {
   chatList: []
 };
 
-export const chatsReducer = (state = initialState, Action) => {
-  switch (Action.type) {
+export const chatsReducer = (state = initialState, action) => {
+  switch (action.type) {
     case CHANGE_COUNTER:
       return {
         ...state,
-        counterID: Action.id
+        counterID: action.id
       };
     case SET_CHAT:
       return {
         ...state,
-        chatList: Action.payload
+        chatList: action.payload
       };
     case RENAME_CHAT:
       return {
         ...state,
         chatList: state.chatList.map((item) =>
-          item.id === Action.id ? { ...item, name: Action.value } : item
+          item.id === action.id ? { ...item, name: action.value } : item
         )
       };
     default:
