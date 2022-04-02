@@ -16,15 +16,15 @@ export const setChat = (payload) => ({
   payload
 });
 
-export const renameChat = (id, text) => ({
+export const renameChat = (id, value) => ({
   type: RENAME_CHAT,
-  id: id,
-  value: text
+  id,
+  value
 });
 
 export const deleteChat = (id) => ({
   type: DELETE_CHAT,
-  id: id
+  id
 });
 
 export const addChatThunk = (id) => () => {

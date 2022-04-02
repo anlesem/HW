@@ -8,7 +8,9 @@ import {
   INIT_MESSAGE,
   CHANGE_COUNTER_MSG,
   INIT_COUNTER_MSG,
-  RESET_COUNTER_MSG
+  RESET_COUNTER_MSG,
+  CHANGE_MESSAGE,
+  DELETE_MESSAGE
 } from './actions';
 
 const initialState = {
@@ -43,6 +45,24 @@ export const messagesReducer = (state = initialState, action) => {
           [action.chatId]: [...state.messageList[action.chatId], action.payload]
         }
       };
+    case CHANGE_MESSAGE:
+      return {
+        ...state,
+        messageList: {
+          ...state.messageList,
+          [action.chatId]: state.messageList[action.chatId].map((item) =>
+            item.id === action.id ? { ...item, text: action.value } : item
+          )
+        }
+      };
+    case DELETE_MESSAGE:
+      return {
+        ...state,
+        messageList: {
+          ...state.messageList,
+          [action.chatId]: action.payload
+        }
+      };
     case RESET_MESSAGE_LIST:
       return {
         ...state,
@@ -58,7 +78,7 @@ export const messagesReducer = (state = initialState, action) => {
         ...state,
         counterMSG: [
           ...state.counterMSG.slice(0, action.id),
-          action.counterMSG,
+          action.counter,
           ...state.counterMSG.slice(action.id + 1)
         ]
       };

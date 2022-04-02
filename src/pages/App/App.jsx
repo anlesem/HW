@@ -31,6 +31,7 @@ export default function App() {
         dispatch(changeLogin(user.email));
         dispatch(initProfileDataThunk());
         dispatch(setChatsDataThunk());
+        dispatch(unsetMessageDataThunk());
         dispatch(setMessageDataThunk());
       } else {
         dispatch(toggleAuth(false));

@@ -3,7 +3,11 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { getChatList, getChatCounter } from '../../store/chats/selectors';
 import { addChatThunk, renameChatThunk, deleteChatThunk } from '../../store/chats/actions';
-import { initMessageThunk } from '../../store/messages/actions';
+import {
+  changeInitMessageThunk,
+  deleteMessagesListThunk,
+  initMessageThunk
+} from '../../store/messages/actions';
 
 import style from './ChatContain.module.scss';
 
@@ -39,12 +43,14 @@ export const ChatContain = () => {
   const handleDelete = (checked) => {
     checked.forEach((id) => {
       dispatch(deleteChatThunk(id));
+      dispatch(deleteMessagesListThunk(id));
     });
     setChecked([0]);
   };
 
   const changeNameChat = (text) => {
     dispatch(renameChatThunk(checked[1], text));
+    dispatch(changeInitMessageThunk(checked[1], text));
     setChecked([0]);
   };
 
