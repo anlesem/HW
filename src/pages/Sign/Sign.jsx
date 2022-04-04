@@ -1,5 +1,4 @@
 import { useState } from 'react';
-// import { useDispatch } from 'react-redux';
 import { logIn, signUp } from '../../services/firebase';
 
 import style from './Sign.module.scss';
@@ -7,24 +6,23 @@ import style from './Sign.module.scss';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
-import { useNavigate, useParams } from 'react-router';
+import { useLocation, useNavigate, useParams } from 'react-router';
 
 export const Sign = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const fromPage = location.state?.from?.pathname || '/';
 
   const { reg } = useParams();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  // const dispatch = useDispatch();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    // dispatch();
-
     try {
       if (reg) await signUp(email, password);
       else await logIn(email, password);
-      navigate('/');
+      navigate(fromPage, { replace: true });
     } catch (err) {
       console.log(err);
     }

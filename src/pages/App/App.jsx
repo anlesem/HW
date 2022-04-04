@@ -15,6 +15,7 @@ import { auth } from '../../services/firebase';
 import { changeLogin, initProfileDataThunk, toggleAuth } from '../../store/profile/actions';
 import { setChatsDataThunk, unsetChatsDataThunk } from '../../store/chats/actions';
 import { setMessageDataThunk, unsetMessageDataThunk } from '../../store/messages/actions';
+import { Private } from '../../HOC/Private';
 
 // const Chats = React.lazy(() => import('../Chats/Chats'));
 const Chats = React.lazy(() =>
@@ -53,9 +54,11 @@ export default function App() {
             <Route
               path="chats"
               element={
-                <React.Suspense fallback={<ProgressBar />}>
-                  <Chats />
-                </React.Suspense>
+                <Private>
+                  <React.Suspense fallback={<ProgressBar />}>
+                    <Chats />
+                  </React.Suspense>
+                </Private>
               }
             />
             <Route

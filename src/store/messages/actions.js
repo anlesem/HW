@@ -128,7 +128,7 @@ export const changeInitMessageThunk = (chatId, newChatName) => (dispatch) => {
     text: `Добро пожаловать в чат ${newChatName}`
   });
   onValue(getMessagesListById(chatId, 0), (snapshot) => {
-    if (snapshot.val()) {
+    if (snapshot.val() && id) {
       dispatch(changeMessage(chatId, id, snapshot.val().text));
     }
   });
