@@ -54,7 +54,7 @@ export const Profile = () => {
   return (
     <div className={style.main}>
       <h1 className={style.head}>{name}</h1>
-      <p className={style.head}>{login}</p>
+      <p className={style.text}>{login}</p>
       {auth ? (
         <ProfileForm
           visible={visible}

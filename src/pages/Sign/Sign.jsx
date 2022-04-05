@@ -5,7 +5,6 @@ import style from './Sign.module.scss';
 
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import SendIcon from '@mui/icons-material/Send';
 import { useLocation, useNavigate, useParams } from 'react-router';
 
 export const Sign = () => {
@@ -29,9 +28,9 @@ export const Sign = () => {
   };
 
   return (
-    <div>
-      <h3>Авторизация</h3>
-      {reg ? <h3>Регистрация</h3> : <h3>Вход</h3>}
+    <div className={style.wrap}>
+      <h3 className={style.head}>Авторизация</h3>
+      {reg ? <h4>Регистрация</h4> : <h4>Вход</h4>}
       <form className={style.form} onSubmit={(event) => handleSubmit(event)}>
         <TextField
           id="outlined-basic_"
@@ -57,8 +56,8 @@ export const Sign = () => {
           inputProps={{ 'data-testid': 'singin-password' }}
           className={style.textField}
         />
-        <Button variant="outlined" type="submit" data-testid={'singin-button'}>
-          <SendIcon />
+        <Button variant="outlined" type="submit" data-testid={'sing-form-button'}>
+          {reg ? 'Зарегистрироваться' : 'Войти'}
         </Button>
       </form>
     </div>

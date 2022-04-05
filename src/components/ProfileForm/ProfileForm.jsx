@@ -23,6 +23,7 @@ export const ProfileForm = ({
         label="Сменить имя"
         data-testid={'profile-box'}
         onChange={handleCheck}
+        className={style.change}
       />
       {visible && (
         <form className={style.form} onSubmit={(event) => handleSubmit(event)}>
@@ -44,9 +45,11 @@ export const ProfileForm = ({
           </Button>
         </form>
       )}
-      <Button variant="outlined" data-testid={'profile-form-button'} onClick={handleClick}>
-        Выйти
-      </Button>
+      <div className={style.exit}>
+        <Button variant="outlined" data-testid={'profile-form-button'} onClick={handleClick}>
+          Выйти
+        </Button>
+      </div>
     </>
   );
 };

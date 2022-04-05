@@ -1,36 +1,22 @@
 import { NavLink } from 'react-router-dom';
+import { GLOBAL } from '../../GlobalData';
 
-import style from './NavBar.module.scss';
+import style from './HeaderNavBar.module.scss';
 
-const navigate = [
-  {
-    id: 1,
-    to: '/',
-    name: 'Профиль'
-  },
-  {
-    id: 2,
-    to: '/chats',
-    name: 'Чаты'
-  },
-  {
-    id: 3,
-    to: '/data',
-    name: 'Данные'
-  }
-];
-
-export const NavBar = () => {
+export const HeaderNavBar = () => {
   return (
     <ul className={style.navbar}>
-      {navigate.map((link) => {
+      {GLOBAL.navigate.map((link) => {
         return (
           <li key={link.id}>
             <NavLink
               to={link.to}
               className={({ isActive }) => (isActive ? style.active : '')}
               data-testid={`NavLink-${link.id}`}>
-              {link.name}
+              <button>
+                {link.icon}
+                {link.name}
+              </button>
             </NavLink>
           </li>
         );

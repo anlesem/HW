@@ -1,13 +1,11 @@
-import { GLOBAL } from '../../GlobalData';
 import style from './Header.module.scss';
 
-import { NavBar } from '../../components/NavBar/NavBar';
+import { HeaderNavBar } from '../HeaderNavBar/HeaderNavBar';
 
 export const Header = () => {
   return (
     <div className={style.wrap + ' container'}>
-      <h1>{GLOBAL.lesson}</h1>
-      <NavBar />
+      <HeaderNavBar />
     </div>
   );
 };
