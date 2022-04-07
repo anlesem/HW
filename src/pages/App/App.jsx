@@ -10,9 +10,15 @@ import { Data } from '../Data/Data';
 import { NotFound } from '../NotFound/NotFound';
 import { ProgressBar } from '../../components/ProgressBar/ProgressBar';
 import { Sign } from '../Sign/Sign';
+import { GLOBAL } from '../../GlobalData';
 
 import { auth } from '../../services/firebase';
-import { changeLogin, initProfileDataThunk, toggleAuth } from '../../store/profile/actions';
+import {
+  changeLogin,
+  changeName,
+  initProfileDataThunk,
+  toggleAuth
+} from '../../store/profile/actions';
 import { setChatsDataThunk, unsetChatsDataThunk } from '../../store/chats/actions';
 import { setMessageDataThunk, unsetMessageDataThunk } from '../../store/messages/actions';
 import { Private } from '../../HOC/Private';
@@ -37,6 +43,7 @@ export default function App() {
       } else {
         dispatch(toggleAuth(false));
         dispatch(changeLogin('email'));
+        dispatch(changeName('user'));
         dispatch(unsetChatsDataThunk());
         dispatch(unsetMessageDataThunk());
       }
@@ -69,7 +76,7 @@ export default function App() {
                 </React.Suspense>
               }
             />
-            <Route path="data" element={<Data />} />
+            <Route path="data" element={<Data api={GLOBAL.api} />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

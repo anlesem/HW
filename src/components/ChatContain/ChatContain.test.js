@@ -23,17 +23,17 @@ describe('ChatContain', () => {
     expect(asFragment(<ChatContain />)).toMatchSnapshot();
   });
 
-  it('Список чатов', () => {
-    const chatId = 1;
-    render(
-      <Provider store={store}>
-        <BrowserRouter>
-          <ChatContain chatData={chatId} />
-        </BrowserRouter>
-      </Provider>
-    );
+  // it('Список чатов', () => {
+  //   const chatId = 1;
+  //   render(
+  //     <Provider store={store}>
+  //       <BrowserRouter>
+  //         <ChatContain chatData={chatId} />
+  //       </BrowserRouter>
+  //     </Provider>
+  //   );
 
-    expect(screen.getByRole('list')).toBeTruthy();
-    expect(screen.getAllByRole('listitem')).toHaveLength(1);
-  });
+  //   expect(screen.getByRole('list')).toBeTruthy();
+  //   expect(screen.getAllByRole('listitem')).toHaveLength(1);
+  // });
 });

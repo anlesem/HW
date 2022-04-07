@@ -17,7 +17,7 @@ describe('NavBar', () => {
     expect(asFragment(<HeaderNavBar />)).toMatchSnapshot();
   });
 
-  it('Изначально список сообщений существует, но пустой', () => {
+  it('Наличие ссылок', () => {
     render(
       <BrowserRouter>
         <HeaderNavBar />

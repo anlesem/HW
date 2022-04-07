@@ -1,12 +1,16 @@
-import React from 'react';
+import { Suspense } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, cleanup } from '@testing-library/react';
+
+import App from '../App/App';
 import { Chats } from './Chats';
 
 import { Provider } from 'react-redux';
 import { store } from '../../store/store';
 
-describe('Chats', () => {
+let id = null;
+
+describe('Chats. Базис', () => {
   it('Компонент существует', () => {
     expect(Chats).toBeInstanceOf(Function);
   });
@@ -19,9 +23,9 @@ describe('Chats', () => {
             <Route
               path="chats"
               element={
-                <React.Suspense fallback={<>...</>}>
+                <Suspense fallback={<>...</>}>
                   <Chats />
-                </React.Suspense>
+                </Suspense>
               }
             />
             <Route path="*" element={<Navigate to="chats" />} />
@@ -31,290 +35,111 @@ describe('Chats', () => {
     );
     expect(asFragment(<Chats />)).toMatchSnapshot();
   });
-
-  it('Состояние при переходе на вкладку Чаты', () => {
-    render(
-      <Provider store={store}>
-        <BrowserRouter>
-          <Routes>
-            <Route
-              path="chats"
-              element={
-                <React.Suspense fallback={<>...</>}>
-                  <Chats />
-                </React.Suspense>
-              }
-            />
-            <Route path="*" element={<Navigate to="chats" />} />
-          </Routes>
-        </BrowserRouter>
-      </Provider>
-    );
-
-    const buttonRemove = screen.getByTestId('chats-button-remove');
-    const inputMessage = screen.getByTestId('message-form-input');
-    const buttonMessage = screen.getByTestId('message-form-button');
-
-    expect(screen.getByText(/чат 1/i)).toBeTruthy();
-    expect(screen.getByText(/выберите чат/i)).toBeTruthy();
-    expect(screen.getByTestId('chat-item-1')).toBeTruthy();
-    expect(screen.queryByTestId('chat-item-2')).toBeFalsy();
-
-    expect(buttonRemove).toHaveClass('Mui-disabled');
-    expect(inputMessage).toHaveClass('Mui-disabled');
-    expect(buttonMessage).toHaveClass('Mui-disabled');
-  });
-
-  it('Добавление чата', () => {
-    render(
-      <Provider store={store}>
-        <BrowserRouter>
-          <Routes>
-            <Route
-              path="chats"
-              element={
-                <React.Suspense fallback={<>...</>}>
-                  <Chats />
-                </React.Suspense>
-              }
-            />
-            <Route path="*" element={<Navigate to="chats" />} />
-          </Routes>
-        </BrowserRouter>
-      </Provider>
-    );
-
-    const buttonAdd = screen.getByTestId('chats-button-add');
-
-    fireEvent.click(buttonAdd);
-    expect(screen.getByTestId('chat-item-1')).toBeTruthy();
-    expect(screen.getByTestId('chat-item-2')).toBeTruthy();
-    expect(screen.queryByTestId('chat-item-3')).toBeFalsy();
-
-    fireEvent.click(buttonAdd);
-    expect(screen.getByTestId('chat-item-3')).toBeTruthy();
-    expect(screen.queryByTestId('chat-item-4')).toBeFalsy();
-  });
-
-  it('Удаление чата', () => {
-    render(
-      <Provider store={store}>
-        <BrowserRouter>
-          <Routes>
-            <Route
-              path="chats"
-              element={
-                <React.Suspense fallback={<>...</>}>
-                  <Chats />
-                </React.Suspense>
-              }
-            />
-            <Route path="*" element={<Navigate to="chats" />} />
-          </Routes>
-        </BrowserRouter>
-      </Provider>
-    );
-
-    const chatItem1 = screen.getByTestId('chat-item-1');
-    const buttonAdd = screen.getByTestId('chats-button-add');
-    const buttonRemove = screen.getByTestId('chats-button-remove');
-    const chatInput1 = screen.getByTestId('chat-check-1');
-
-    expect(chatInput1.checked).toBeFalsy();
-    expect(screen.getByText(/чат 1/i)).toBeTruthy();
-    expect(buttonRemove).toHaveClass('Mui-disabled');
-    expect(screen.queryByTestId('chat-form-input')).toBeFalsy();
-    expect(screen.queryByTestId('chat-form-button')).toBeFalsy();
-
-    fireEvent.click(chatItem1);
-    expect(chatInput1.checked).toBeTruthy();
-    expect(buttonRemove).not.toHaveClass('Mui-disabled');
-    expect(screen.getByTestId('chat-form-input')).toBeTruthy();
-    expect(screen.getByTestId('chat-form-button')).toBeTruthy();
-
-    fireEvent.click(buttonRemove);
-    expect(screen.getByText(/чат 2/i)).toBeTruthy();
-    expect(buttonRemove).toHaveClass('Mui-disabled');
-    expect(screen.queryByTestId('chat-item-1')).toBeFalsy();
-    expect(screen.getByTestId('chat-item-2')).toBeTruthy();
-
-    fireEvent.click(buttonAdd);
-    fireEvent.click(buttonAdd);
-    expect(screen.getByText(/чат 3/i)).toBeTruthy();
-    expect(screen.getByText(/чат 4/i)).toBeTruthy();
-    expect(buttonRemove).toHaveClass('Mui-disabled');
-    expect(screen.queryByTestId('chat-form-input')).toBeFalsy();
-    expect(screen.queryByTestId('chat-form-button')).toBeFalsy();
-
-    const chatItem2 = screen.getByTestId('chat-item-2');
-    const chatItem3 = screen.getByTestId('chat-item-3');
-    const chatItem4 = screen.getByTestId('chat-item-4');
-    const chatInput2 = screen.getByTestId('chat-check-2');
-    const chatInput3 = screen.getByTestId('chat-check-3');
-    const chatInput4 = screen.getByTestId('chat-check-4');
-
-    fireEvent.click(chatItem2);
-    expect(chatInput2.checked).toBeTruthy();
-    expect(buttonRemove).not.toHaveClass('Mui-disabled');
-    expect(screen.getByTestId('chat-form-input')).toBeTruthy();
-    expect(screen.getByTestId('chat-form-button')).toBeTruthy();
-
-    fireEvent.click(chatItem3);
-    fireEvent.click(chatItem4);
-    expect(chatInput3.checked).toBeTruthy();
-    expect(chatInput4.checked).toBeTruthy();
-    expect(buttonRemove).not.toHaveClass('Mui-disabled');
-    expect(screen.queryByTestId('chat-form-input')).toBeFalsy();
-    expect(screen.queryByTestId('chat-form-button')).toBeFalsy();
-
-    fireEvent.click(buttonRemove);
-    expect(screen.getByText(/чат 5/i)).toBeTruthy();
-    expect(buttonRemove).toHaveClass('Mui-disabled');
-    expect(screen.queryByTestId('chat-item-4')).toBeFalsy();
-    expect(screen.getByTestId('chat-item-5')).toBeTruthy();
-    expect(screen.queryByTestId('chat-item-6')).toBeFalsy();
-    expect(screen.queryByTestId('chat-form-input')).toBeFalsy();
-    expect(screen.queryByTestId('chat-form-button')).toBeFalsy();
-  });
-
-  it('Переименование чата', () => {
-    render(
-      <Provider store={store}>
-        <BrowserRouter>
-          <Routes>
-            <Route
-              path="chats"
-              element={
-                <React.Suspense fallback={<>...</>}>
-                  <Chats />
-                </React.Suspense>
-              }
-            />
-            <Route path="*" element={<Navigate to="chats" />} />
-          </Routes>
-        </BrowserRouter>
-      </Provider>
-    );
-
-    const buttonAdd = screen.getByTestId('chats-button-add');
-    const chatItem5 = screen.getByTestId('chat-item-5');
-
-    expect(screen.getByText(/чат 5/i)).toBeTruthy();
-
-    fireEvent.click(chatItem5);
-
-    const inputName = screen.getByTestId('chat-form-input');
-    const buttonName = screen.getByTestId('chat-form-button');
-
-    fireEvent.change(inputName, { target: { value: 'Вася' } });
-    expect(inputName.value).toBe('Вася');
-
-    fireEvent.click(buttonName);
-    expect(screen.getByText(/вася/i)).toBeTruthy();
-    expect(screen.queryByTestId('chat-form-input')).toBeFalsy();
-    expect(screen.queryByTestId('chat-form-button')).toBeFalsy();
-
-    fireEvent.click(buttonAdd);
-    expect(screen.getByText(/чат 6/i)).toBeTruthy();
-
-    const chatItem6 = screen.getByTestId('chat-item-6');
-
-    fireEvent.click(chatItem6);
-    fireEvent.change(inputName, { target: { value: 'Петя' } });
-
-    fireEvent.click(chatItem5);
-    expect(screen.queryByTestId('chat-form-input')).toBeFalsy();
-    expect(screen.queryByTestId('chat-form-button')).toBeFalsy();
-
-    fireEvent.click(chatItem5);
-    fireEvent.click(buttonName);
-    expect(screen.getByText(/вася/i)).toBeTruthy();
-    expect(screen.getByText(/чат 6/i)).toBeTruthy();
-  });
-
-  it('Переименование чата по нажатию Enter', () => {
-    render(
-      <Provider store={store}>
-        <BrowserRouter>
-          <Routes>
-            <Route
-              path="chats"
-              element={
-                <React.Suspense fallback={<>...</>}>
-                  <Chats />
-                </React.Suspense>
-              }
-            />
-            <Route path="*" element={<Navigate to="chats" />} />
-          </Routes>
-        </BrowserRouter>
-      </Provider>
-    );
-
-    const chatItem5 = screen.getByTestId('chat-item-5');
-    expect(screen.getByText(/вася/i)).toBeTruthy();
-
-    fireEvent.click(chatItem5);
-
-    const inputName = screen.getByTestId('chat-form-input');
-
-    fireEvent.change(inputName, { target: { value: 'Петя' } });
-    expect(inputName.value).toBe('Петя');
-
-    fireEvent.keyDown(inputName, { key: 'enter', keyCode: 13 });
-    expect(screen.getByText(/петя/i)).toBeTruthy();
-    expect(screen.queryByTestId('chat-form-input')).toBeFalsy();
-    expect(screen.queryByTestId('chat-form-button')).toBeFalsy();
-  });
 });
 
-describe('Chats/id', () => {
-  it('Состояние при открытии чата', () => {
+describe('Chats. Работа с чатами и сообщениями', () => {
+  beforeEach(() => {
     render(
       <Provider store={store}>
-        <BrowserRouter>
-          <Routes>
-            <Route
-              path="chats/:chatId"
-              element={
-                <React.Suspense fallback={<>...</>}>
-                  <Chats />
-                </React.Suspense>
-              }
-            />
-            <Route path="*" element={<Navigate to="chats/5" />} />
-          </Routes>
-        </BrowserRouter>
+        <App />
       </Provider>
     );
+  });
 
+  afterEach(cleanup);
+
+  it('Вход', async () => {
+    const login = screen.getByTestId('sign-email');
+    const password = screen.getByTestId('sign-password');
+    const button = screen.getByTestId('sign-submit');
+
+    fireEvent.change(login, { target: { value: 'login@test.test' } });
+    fireEvent.change(password, { target: { value: '123456' } });
+    fireEvent.click(button);
+
+    await new Promise((res) => setTimeout(res, 1000));
+
+    expect(screen.getByText(/сообщения:/i)).toBeTruthy();
+    expect(screen.getByTestId('chats-button-remove')).toHaveClass('Mui-disabled');
+
+    id = +store.getState().chats.counterID;
+    console.log('🚀 ~ it ~ id', id);
+  });
+
+  it('Добавление чата', async () => {
+    const buttonAdd = screen.getByTestId('chats-button-add');
+
+    fireEvent.click(buttonAdd);
+    expect(screen.getByTestId(`chat-item-${id + 1}`)).toBeTruthy();
+    expect(screen.queryByTestId(`chat-item-${id + 2}`)).toBeFalsy();
+
+    await new Promise((res) => setTimeout(res, 500));
+
+    fireEvent.click(buttonAdd);
+
+    await new Promise((res) => setTimeout(res, 500));
+
+    fireEvent.click(buttonAdd);
+    expect(screen.getByTestId(`chat-item-${id + 2}`)).toBeTruthy();
+    expect(screen.getByTestId(`chat-item-${id + 3}`)).toBeTruthy();
+    expect(screen.queryByTestId(`chat-item-${id + 4}`)).toBeFalsy();
+  });
+
+  it('Переключение между чатами', async () => {
+    fireEvent.click(screen.getByTestId(`chat-change-${id + 1}`));
+    await new Promise((res) => setTimeout(res, 500));
     const inputMessage = screen.getByTestId('message-form-input');
     const buttonMessage = screen.getByTestId('message-form-button');
 
-    expect(screen.getByText(/Добро пожаловать в чат №5/)).toBeTruthy();
+    expect(screen.getByText(`Добро пожаловать в чат №${id + 1}`)).toBeTruthy();
     expect(screen.getByTestId('list-item-0')).toBeTruthy();
     expect(inputMessage).not.toHaveClass('Mui-disabled');
     expect(buttonMessage).not.toHaveClass('Mui-disabled');
+
+    fireEvent.click(screen.getByTestId(`chat-change-${id + 2}`));
+    expect(screen.getByText(`Добро пожаловать в чат №${id + 2}`)).toBeTruthy();
   });
 
-  it('Добавление сообщения по кнопке и Enter', () => {
-    render(
-      <Provider store={store}>
-        <BrowserRouter>
-          <Routes>
-            <Route
-              path="chats/:chatId"
-              element={
-                <React.Suspense fallback={<>...</>}>
-                  <Chats />
-                </React.Suspense>
-              }
-            />
-            <Route path="*" element={<Navigate to="chats/5" />} />
-          </Routes>
-        </BrowserRouter>
-      </Provider>
-    );
+  it('Переименование чата', async () => {
+    fireEvent.click(screen.getByTestId(`chat-change-${id + 2}`));
+    await new Promise((res) => setTimeout(res, 500));
+    expect(screen.getByText(`Добро пожаловать в чат №${id + 2}`)).toBeTruthy();
+    const chatItem2 = screen.getByTestId(`chat-item-${id + 2}`);
+
+    fireEvent.click(chatItem2);
+    const inputName = screen.getByTestId('chat-form-input');
+    const buttonName = screen.getByTestId('chat-form-button');
+
+    fireEvent.change(inputName, { target: { value: 'TestNewName' } });
+    expect(inputName.value).toBe('TestNewName');
+
+    fireEvent.click(buttonName);
+    await new Promise((res) => setTimeout(res, 500));
+    expect(screen.getAllByText(/\btestnewname\b/gi)).toHaveLength(2);
+    expect(screen.queryByTestId('chat-form-input')).toBeFalsy();
+    expect(screen.queryByTestId('chat-form-button')).toBeFalsy();
+  });
+
+  it('Переименование чата по нажатию Enter', async () => {
+    fireEvent.click(screen.getByTestId(`chat-change-${id + 3}`));
+    await new Promise((res) => setTimeout(res, 500));
+    expect(screen.getByText(`Добро пожаловать в чат №${id + 3}`)).toBeTruthy();
+    const chatItem3 = screen.getByTestId(`chat-item-${id + 3}`);
+
+    fireEvent.click(chatItem3);
+    const inputName = screen.getByTestId('chat-form-input');
+
+    fireEvent.change(inputName, { target: { value: 'TestAnotherName' } });
+    fireEvent.keyDown(inputName, { key: 'enter', keyCode: 13 });
+    await new Promise((res) => setTimeout(res, 500));
+    expect(screen.getAllByText(/\btestAnotherName\b/gi)).toHaveLength(2);
+    expect(screen.queryByTestId('chat-form-input')).toBeFalsy();
+    expect(screen.queryByTestId('chat-form-button')).toBeFalsy();
+  });
+
+  it('Добавление сообщения по кнопке и Enter', async () => {
+    fireEvent.click(screen.getByTestId(`chat-change-${id + 3}`));
+    await new Promise((res) => setTimeout(res, 500));
 
     const inputMessage = screen.getByTestId('message-form-input');
     const buttonMessage = screen.getByTestId('message-form-button');
@@ -322,62 +147,89 @@ describe('Chats/id', () => {
     fireEvent.change(inputMessage, { target: { value: 'SomeMessage' } });
     expect(inputMessage.value).toBe('SomeMessage');
     fireEvent.click(buttonMessage);
-    expect(screen.getByText(/SomeMessage/)).toBeTruthy();
+    expect(screen.getByText('SomeMessage')).toBeTruthy();
     expect(screen.getByTestId('list-item-1')).toBeTruthy();
     expect(screen.queryByTestId('list-item-2')).toBeFalsy();
 
-    setTimeout(() => {
-      expect(screen.getByTestId('list-item-2')).toBeTruthy();
+    await new Promise((res) => setTimeout(res, 1500));
+    expect(screen.getByText('I am bot')).toBeTruthy();
+    expect(screen.getByTestId('list-item-2')).toBeTruthy();
 
-      fireEvent.change(inputMessage, { target: { value: 'AnotherMessage' } });
-      expect(inputMessage.value).toBe('AnotherMessage');
-
-      fireEvent.keyDown(inputMessage, { key: 'enter', keyCode: 13 });
-      expect(screen.getByText(/AnotherMessage/)).toBeTruthy();
-      expect(screen.getByTestId('list-item-3')).toBeTruthy();
-      expect(screen.queryByTestId('list-item-4')).toBeFalsy();
-    }, 2000);
+    fireEvent.change(inputMessage, { target: { value: 'AnotherMessage' } });
+    fireEvent.keyDown(inputMessage, { key: 'enter', keyCode: 13 });
+    expect(screen.getByText('AnotherMessage')).toBeTruthy();
+    expect(screen.getByTestId('list-item-3')).toBeTruthy();
+    expect(screen.queryByTestId('list-item-4')).toBeFalsy();
   });
 
-  it('Изменение значения поля ввода при переключении между чатами', () => {
-    render(
-      <Provider store={store}>
-        <BrowserRouter>
-          <Routes>
-            <Route
-              path="chats/:chatId"
-              element={
-                <React.Suspense fallback={<>...</>}>
-                  <Chats />
-                </React.Suspense>
-              }
-            />
-            <Route path="*" element={<Navigate to="chats/5" />} />
-          </Routes>
-        </BrowserRouter>
-      </Provider>
-    );
+  it('Изменение значения поля ввода при переключении между чатами', async () => {
+    fireEvent.click(screen.getByTestId(`chat-change-${id + 3}`));
+    await new Promise((res) => setTimeout(res, 500));
+    expect(screen.getAllByText(/\btestAnotherName\b/gi)).toHaveLength(2);
 
-    const buttonAdd = screen.getByTestId('chats-button-add');
     const inputMessage = screen.getByTestId('message-form-input');
+    fireEvent.change(inputMessage, { target: { value: 'SomeInputMessage' } });
+    expect(inputMessage.value).toBe('SomeInputMessage');
 
-    fireEvent.click(buttonAdd);
-    expect(screen.getByTestId('chat-item-6')).toBeTruthy();
-    expect(screen.getByTestId('chat-item-7')).toBeTruthy();
-
-    const chatChange6 = screen.getByTestId('chat-change-6');
-    const chatChange7 = screen.getByTestId('chat-change-7');
-
-    fireEvent.click(chatChange6);
-    fireEvent.change(inputMessage, { target: { value: 'SomeMessage' } });
-    expect(inputMessage.value).toBe('SomeMessage');
-
-    fireEvent.click(chatChange7);
-    expect(screen.getByText(/Добро пожаловать в чат №7/)).toBeTruthy();
+    fireEvent.click(screen.getByTestId(`chat-change-${id + 2}`));
+    await new Promise((res) => setTimeout(res, 500));
+    expect(screen.getAllByText(/\btestnewname\b/gi)).toHaveLength(2);
     expect(inputMessage.value).toBe('');
 
-    fireEvent.click(chatChange6);
-    expect(screen.getByText(/Добро пожаловать в чат №6/)).toBeTruthy();
-    expect(inputMessage.value).toBe('SomeMessage');
+    fireEvent.click(screen.getByTestId(`chat-change-${id + 3}`));
+    expect(screen.getAllByText(/\btestAnotherName\b/gi)).toHaveLength(2);
+    await new Promise((res) => setTimeout(res, 500));
+    expect(inputMessage.value).toBe('SomeInputMessage');
+  });
+
+  it('Удаление чата', () => {
+    const buttonRemove = screen.getByTestId('chats-button-remove');
+
+    const chatCheck1 = screen.getByTestId(`chat-check-${id + 1}`);
+    const chatCheck2 = screen.getByTestId(`chat-check-${id + 2}`);
+    const chatCheck3 = screen.getByTestId(`chat-check-${id + 3}`);
+
+    const chatItem1 = screen.getByTestId(`chat-item-${id + 1}`);
+    const chatItem2 = screen.getByTestId(`chat-item-${id + 2}`);
+    const chatItem3 = screen.getByTestId(`chat-item-${id + 3}`);
+
+    expect(chatCheck1.checked).toBeFalsy();
+    expect(buttonRemove).toHaveClass('Mui-disabled');
+    expect(screen.queryByTestId('chat-form-input')).toBeFalsy();
+    expect(screen.queryByTestId('chat-form-button')).toBeFalsy();
+
+    fireEvent.click(chatItem1);
+    expect(chatCheck1.checked).toBeTruthy();
+    expect(buttonRemove).not.toHaveClass('Mui-disabled');
+    expect(screen.getByTestId('chat-form-input')).toBeTruthy();
+    expect(screen.getByTestId('chat-form-button')).toBeTruthy();
+
+    fireEvent.click(chatItem2);
+    expect(chatCheck1.checked).toBeTruthy();
+    expect(chatCheck2.checked).toBeTruthy();
+    expect(buttonRemove).not.toHaveClass('Mui-disabled');
+    expect(screen.queryByTestId('chat-form-input')).toBeFalsy();
+    expect(screen.queryByTestId('chat-form-button')).toBeFalsy();
+
+    fireEvent.click(chatItem2);
+    expect(chatCheck1.checked).toBeTruthy();
+    expect(chatCheck2.checked).toBeFalsy();
+    expect(buttonRemove).not.toHaveClass('Mui-disabled');
+    expect(screen.getByTestId('chat-form-input')).toBeTruthy();
+    expect(screen.getByTestId('chat-form-button')).toBeTruthy();
+
+    fireEvent.click(chatItem2);
+    fireEvent.click(chatItem3);
+    expect(chatCheck1.checked).toBeTruthy();
+    expect(chatCheck2.checked).toBeTruthy();
+    expect(chatCheck3.checked).toBeTruthy();
+
+    fireEvent.click(buttonRemove);
+    expect(screen.queryByTestId(`chat-item-${id + 1}`)).toBeFalsy();
+    expect(screen.queryByTestId(`chat-item-${id + 2}`)).toBeFalsy();
+    expect(screen.queryByTestId(`chat-item-${id + 3}`)).toBeFalsy();
+    expect(buttonRemove).toHaveClass('Mui-disabled');
+    expect(screen.queryByTestId('chat-form-input')).toBeFalsy();
+    expect(screen.queryByTestId('chat-form-button')).toBeFalsy();
   });
 });

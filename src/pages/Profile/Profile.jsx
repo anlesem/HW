@@ -9,7 +9,7 @@ import {
   getProfileAuth,
   getProfileVisible
 } from '../../store/profile/selectors';
-import { changeName, changeNameThunk, toggleVisible } from '../../store/profile/actions';
+import { changeNameThunk, toggleVisible } from '../../store/profile/actions';
 
 import style from './Profile.module.scss';
 
@@ -27,7 +27,6 @@ export const Profile = () => {
 
   const handleClick = async () => {
     logOut();
-    dispatch(changeName('user'));
   };
 
   const handleSubmit = (event) => {

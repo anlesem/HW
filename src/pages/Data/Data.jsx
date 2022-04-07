@@ -9,14 +9,14 @@ import style from './Data.module.scss';
 import Button from '@mui/material/Button';
 import { ProgressBar } from '../../components/ProgressBar/ProgressBar';
 
-export const Data = () => {
+export const Data = ({ api }) => {
   const data = useSelector(getDataData);
   const load = useSelector(getDataLoad);
   const error = useSelector(getDataError);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getDataAllThunk());
+    dispatch(getDataAllThunk(api));
   }, []);
 
   return (

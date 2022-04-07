@@ -15,15 +15,17 @@ export const Sign = () => {
   const { reg } = useParams();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setError('');
     try {
       if (reg) await signUp(email, password);
       else await logIn(email, password);
       navigate(fromPage, { replace: true });
     } catch (err) {
-      console.log(err);
+      setError(() => err.message);
     }
   };
 
@@ -41,7 +43,7 @@ export const Sign = () => {
           value={email}
           onChange={(event) => setEmail(event.target.value)}
           required
-          inputProps={{ 'data-testid': 'singin-email' }}
+          inputProps={{ 'data-testid': 'sign-email' }}
           className={style.textField}
         />
         <TextField
@@ -53,13 +55,14 @@ export const Sign = () => {
           value={password}
           onChange={(event) => setPassword(event.target.value)}
           required
-          inputProps={{ 'data-testid': 'singin-password' }}
+          inputProps={{ 'data-testid': 'sign-password' }}
           className={style.textField}
         />
-        <Button variant="outlined" type="submit" data-testid={'sing-form-button'}>
+        <Button variant="outlined" type="submit" data-testid={'sign-submit'}>
           {reg ? 'Зарегистрироваться' : 'Войти'}
         </Button>
       </form>
+      <div className={style.error}>{error}</div>
     </div>
   );
 };

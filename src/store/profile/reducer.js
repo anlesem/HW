@@ -7,8 +7,8 @@ const initialState = {
   name: 'user'
 };
 
-export const profileReducer = (state = initialState, Action) => {
-  switch (Action.type) {
+export const profileReducer = (state = initialState, action) => {
+  switch (action.type) {
     case TOGGLE_VISIBLE:
       return {
         ...state,
@@ -17,17 +17,17 @@ export const profileReducer = (state = initialState, Action) => {
     case TOGGLE_AUTH:
       return {
         ...state,
-        auth: Action.status
+        auth: action.status
       };
     case CHANGE_LOGIN:
       return {
         ...state,
-        login: Action.email
+        login: action.email
       };
     case CHANGE_NAME:
       return {
         ...state,
-        name: Action.name
+        name: action.name
       };
     default:
       return state;

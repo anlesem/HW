@@ -46,7 +46,7 @@ export const ProfileForm = ({
         </form>
       )}
       <div className={style.exit}>
-        <Button variant="outlined" data-testid={'profile-form-button'} onClick={handleClick}>
+        <Button variant="outlined" data-testid={'profile-button-exit'} onClick={handleClick}>
           Выйти
         </Button>
       </div>

@@ -7,12 +7,12 @@ export const ProfileButtons = () => {
   return (
     <div className={style.buttons}>
       <Link to="sign">
-        <Button variant="outlined" data-testid={'profile-form-button'}>
+        <Button variant="outlined" data-testid={'profile-link-enter'}>
           Войти
         </Button>
       </Link>
       <Link to="sign/reg">
-        <Button variant="outlined" data-testid={'profile-form-button'}>
+        <Button variant="outlined" data-testid={'profile-link-reg'}>
           Регистрация
         </Button>
       </Link>

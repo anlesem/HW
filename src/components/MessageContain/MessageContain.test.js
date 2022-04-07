@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { MessageContain } from './MessageContain';
 
 import { Provider } from 'react-redux';
@@ -17,16 +17,5 @@ describe('MessageContain', () => {
       </Provider>
     );
     expect(asFragment(<MessageContain chatId={chatId} />)).toMatchSnapshot();
-  });
-
-  it('Отображает приветственное сообщение', () => {
-    const chatId = '1';
-    render(
-      <Provider store={store}>
-        <MessageContain chatId={chatId} />
-      </Provider>
-    );
-
-    expect(screen.getByText(/добро пожаловать/i)).toBeTruthy();
   });
 });
