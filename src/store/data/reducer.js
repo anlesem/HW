@@ -6,17 +6,17 @@ const initialState = {
   error: false
 };
 
-export const dataReducer = (state = initialState, Action) => {
-  switch (Action.type) {
+export const dataReducer = (state = initialState, action) => {
+  switch (action.type) {
     case GET_ALL_DATA:
       return {
         ...state,
-        data: Action.payload
+        data: action.payload
       };
     // case GET_DATA:
     //   return {
     //     ...state,
-    //     data: [...state.data, Action.payload]
+    //     data: [...state.data, action.payload]
     //   };
     case TOGGLE_LOAD:
       return {
@@ -26,7 +26,7 @@ export const dataReducer = (state = initialState, Action) => {
     case SET_ERROR:
       return {
         ...state,
-        error: Action.status
+        error: action.status
       };
     default:
       return state;

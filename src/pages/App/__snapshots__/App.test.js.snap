@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`App Снимок состояния 1`] = `
+exports[`App базис Снимок состояния 1`] = `
 <DocumentFragment>
   <div
     class="root"
@@ -14,9 +14,6 @@ exports[`App Снимок состояния 1`] = `
         <div
           class="wrap container"
         >
-          <h1>
-            Урок 8
-          </h1>
           <ul
             class="navbar"
           >
@@ -27,7 +24,24 @@ exports[`App Снимок состояния 1`] = `
                 data-testid="NavLink-1"
                 href="/"
               >
-                Профиль
+                <button>
+                  <svg
+                    aria-hidden="true"
+                    class="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-1q8v7ak-MuiSvgIcon-root"
+                    data-testid="AccountCircleTwoToneIcon"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M12 4c-4.41 0-8 3.59-8 8 0 1.82.62 3.49 1.64 4.83 1.43-1.74 4.9-2.33 6.36-2.33s4.93.59 6.36 2.33C19.38 15.49 20 13.82 20 12c0-4.41-3.59-8-8-8zm0 9c-1.94 0-3.5-1.56-3.5-3.5S10.06 6 12 6s3.5 1.56 3.5 3.5S13.94 13 12 13z"
+                      opacity=".3"
+                    />
+                    <path
+                      d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM7.07 18.28c.43-.9 3.05-1.78 4.93-1.78s4.51.88 4.93 1.78C15.57 19.36 13.86 20 12 20s-3.57-.64-4.93-1.72zm11.29-1.45c-1.43-1.74-4.9-2.33-6.36-2.33s-4.93.59-6.36 2.33C4.62 15.49 4 13.82 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8c0 1.82-.62 3.49-1.64 4.83zM12 6c-1.94 0-3.5 1.56-3.5 3.5S10.06 13 12 13s3.5-1.56 3.5-3.5S13.94 6 12 6zm0 5c-.83 0-1.5-.67-1.5-1.5S11.17 8 12 8s1.5.67 1.5 1.5S12.83 11 12 11z"
+                    />
+                  </svg>
+                  Профиль
+                </button>
               </a>
             </li>
             <li>
@@ -36,7 +50,24 @@ exports[`App Снимок состояния 1`] = `
                 data-testid="NavLink-2"
                 href="/chats"
               >
-                Чаты
+                <button>
+                  <svg
+                    aria-hidden="true"
+                    class="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-1q8v7ak-MuiSvgIcon-root"
+                    data-testid="ChatBubbleTwoToneIcon"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="m4 18 2-2h14V4H4z"
+                      opacity=".3"
+                    />
+                    <path
+                      d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"
+                    />
+                  </svg>
+                  Чаты
+                </button>
               </a>
             </li>
             <li>
@@ -45,7 +76,24 @@ exports[`App Снимок состояния 1`] = `
                 data-testid="NavLink-3"
                 href="/data"
               >
-                Данные
+                <button>
+                  <svg
+                    aria-hidden="true"
+                    class="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-1q8v7ak-MuiSvgIcon-root"
+                    data-testid="CloudQueueTwoToneIcon"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M19 12h-1.5v-.5C17.5 8.46 15.04 6 12 6c-2.52 0-4.63 1.69-5.29 4H6c-2.21 0-4 1.79-4 4s1.79 4 4 4h13c1.66 0 3-1.34 3-3s-1.34-3-3-3z"
+                      opacity=".3"
+                    />
+                    <path
+                      d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM19 18H6c-2.21 0-4-1.79-4-4s1.79-4 4-4h.71C7.37 7.69 9.48 6 12 6c3.04 0 5.5 2.46 5.5 5.5v.5H19c1.66 0 3 1.34 3 3s-1.34 3-3 3z"
+                    />
+                  </svg>
+                  Данные
+                </button>
               </a>
             </li>
           </ul>
@@ -62,40 +110,45 @@ exports[`App Снимок состояния 1`] = `
           >
             user
           </h1>
-          <label
-            class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-j204z7-MuiFormControlLabel-root"
-            data-testid="profile-box"
+          <p
+            class="text"
           >
-            <span
-              class="MuiCheckbox-root MuiCheckbox-colorPrimary MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-root css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root"
+            email
+          </p>
+          <div
+            class="buttons"
+          >
+            <a
+              href="/sign"
             >
-              <input
-                class="PrivateSwitchBase-input css-1m9pwf3"
-                data-indeterminate="false"
-                data-testid="profile-check"
-                type="checkbox"
-              />
-              <svg
-                aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
-                data-testid="CheckBoxOutlineBlankIcon"
-                focusable="false"
-                viewBox="0 0 24 24"
+              <button
+                class="MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButtonBase-root  css-1rwt2y5-MuiButtonBase-root-MuiButton-root"
+                data-testid="profile-link-enter"
+                tabindex="0"
+                type="button"
               >
-                <path
-                  d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
+                Войти
+                <span
+                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
                 />
-              </svg>
-              <span
-                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-              />
-            </span>
-            <span
-              class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-ahj2mt-MuiTypography-root"
+              </button>
+            </a>
+            <a
+              href="/sign/reg"
             >
-              Авторизоваться
-            </span>
-          </label>
+              <button
+                class="MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButtonBase-root  css-1rwt2y5-MuiButtonBase-root-MuiButton-root"
+                data-testid="profile-link-reg"
+                tabindex="0"
+                type="button"
+              >
+                Регистрация
+                <span
+                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                />
+              </button>
+            </a>
+          </div>
         </div>
       </main>
       <footer

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Profile Снимок состояния 1`] = `
+exports[`Profile. Базис Снимок состояния 1`] = `
 <DocumentFragment>
   <div
     class="main"
@@ -10,40 +10,45 @@ exports[`Profile Снимок состояния 1`] = `
     >
       user
     </h1>
-    <label
-      class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-j204z7-MuiFormControlLabel-root"
-      data-testid="profile-box"
+    <p
+      class="text"
     >
-      <span
-        class="MuiCheckbox-root MuiCheckbox-colorPrimary MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-root css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root"
+      email
+    </p>
+    <div
+      class="buttons"
+    >
+      <a
+        href="/sign"
       >
-        <input
-          class="PrivateSwitchBase-input css-1m9pwf3"
-          data-indeterminate="false"
-          data-testid="profile-check"
-          type="checkbox"
-        />
-        <svg
-          aria-hidden="true"
-          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
-          data-testid="CheckBoxOutlineBlankIcon"
-          focusable="false"
-          viewBox="0 0 24 24"
+        <button
+          class="MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButtonBase-root  css-1rwt2y5-MuiButtonBase-root-MuiButton-root"
+          data-testid="profile-link-enter"
+          tabindex="0"
+          type="button"
         >
-          <path
-            d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
+          Войти
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
-        </svg>
-        <span
-          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-        />
-      </span>
-      <span
-        class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-ahj2mt-MuiTypography-root"
+        </button>
+      </a>
+      <a
+        href="/sign/reg"
       >
-        Авторизоваться
-      </span>
-    </label>
+        <button
+          class="MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButtonBase-root  css-1rwt2y5-MuiButtonBase-root-MuiButton-root"
+          data-testid="profile-link-reg"
+          tabindex="0"
+          type="button"
+        >
+          Регистрация
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </button>
+      </a>
+    </div>
   </div>
 </DocumentFragment>
 `;

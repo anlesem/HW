@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProfileButtons Снимок состояния 1`] = `
+<DocumentFragment>
+  <div
+    class="buttons"
+  >
+    <a
+      href="/sign"
+    >
+      <button
+        class="MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButtonBase-root  css-1rwt2y5-MuiButtonBase-root-MuiButton-root"
+        data-testid="profile-link-enter"
+        tabindex="0"
+        type="button"
+      >
+        Войти
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+    </a>
+    <a
+      href="/sign/reg"
+    >
+      <button
+        class="MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButtonBase-root  css-1rwt2y5-MuiButtonBase-root-MuiButton-root"
+        data-testid="profile-link-reg"
+        tabindex="0"
+        type="button"
+      >
+        Регистрация
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+    </a>
+  </div>
+</DocumentFragment>
+`;

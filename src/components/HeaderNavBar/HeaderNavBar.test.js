@@ -1,26 +1,26 @@
 import { BrowserRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 
-import { NavBar } from './NavBar';
+import { HeaderNavBar } from './HeaderNavBar';
 
 describe('NavBar', () => {
   it('Компонент существует', () => {
-    expect(NavBar).toBeInstanceOf(Function);
+    expect(HeaderNavBar).toBeInstanceOf(Function);
   });
 
   it('Снимок состояния', () => {
     const { asFragment } = render(
       <BrowserRouter>
-        <NavBar />
+        <HeaderNavBar />
       </BrowserRouter>
     );
-    expect(asFragment(<NavBar />)).toMatchSnapshot();
+    expect(asFragment(<HeaderNavBar />)).toMatchSnapshot();
   });
 
-  it('Изначально список сообщений существует, но пустой', () => {
+  it('Наличие ссылок', () => {
     render(
       <BrowserRouter>
-        <NavBar />
+        <HeaderNavBar />
       </BrowserRouter>
     );
 

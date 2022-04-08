@@ -1,40 +1,28 @@
-import { ADD_CHAT, RENAME_CHAT, DELETE_CHAT } from './actions';
+import { CHANGE_COUNTER, SET_CHAT, RENAME_CHAT } from './actions';
 
 const initialState = {
-  counterID: 1,
-  chatList: [
-    {
-      id: 1,
-      name: 'чат 1'
-    }
-  ]
+  counterID: 0,
+  chatList: []
 };
 
-export const chatsReducer = (state = initialState, Action) => {
-  switch (Action.type) {
-    case ADD_CHAT:
+export const chatsReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case CHANGE_COUNTER:
       return {
         ...state,
-        chatList: [
-          ...state.chatList,
-          {
-            id: state.counterID + 1,
-            name: `чат ${state.counterID + 1}`
-          }
-        ],
-        counterID: state.counterID + 1
+        counterID: action.id
+      };
+    case SET_CHAT:
+      return {
+        ...state,
+        chatList: action.payload
       };
     case RENAME_CHAT:
       return {
         ...state,
         chatList: state.chatList.map((item) =>
-          item.id === Action.id ? { ...item, name: Action.value } : item
+          item.id === action.id ? { ...item, name: action.value } : item
         )
-      };
-    case DELETE_CHAT:
-      return {
-        ...state,
-        chatList: state.chatList.filter(({ id }) => id !== Action.id)
       };
     default:
       return state;

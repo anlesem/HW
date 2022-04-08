@@ -15,12 +15,14 @@ export const MessageList = ({ message }) => {
     <ul className={style.messages} ref={scrollMessages}>
       {message &&
         message.map((item, idx) => {
-          return (
-            <li key={item.id} className={style.message} data-testid={'list-item-' + idx}>
-              <p className={style.message_text}>{item.text}</p>
-              <p className={style.message_author}>{item.author}</p>
-            </li>
-          );
+          if (item) {
+            return (
+              <li key={item.id} className={style.message} data-testid={'list-item-' + idx}>
+                <p className={style.message_text}>{item.text}</p>
+                <p className={style.message_author}>{item.author}</p>
+              </li>
+            );
+          }
         })}
     </ul>
   );

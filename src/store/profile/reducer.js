@@ -1,30 +1,33 @@
-import { TOGGLE_PROFILE, INPUT_NAME, CHANGE_NAME } from './actions';
+import { TOGGLE_VISIBLE, TOGGLE_AUTH, CHANGE_LOGIN, CHANGE_NAME } from './actions';
 
 const initialState = {
   visible: false,
-  input: '',
+  auth: false,
+  login: 'email',
   name: 'user'
 };
 
-export const profileReducer = (state = initialState, Action) => {
-  switch (Action.type) {
-    case TOGGLE_PROFILE:
+export const profileReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case TOGGLE_VISIBLE:
       return {
         ...state,
-        visible: !state.visible,
-        input: ''
+        visible: !state.visible
       };
-    case INPUT_NAME:
+    case TOGGLE_AUTH:
       return {
         ...state,
-        input: Action.value
+        auth: action.status
+      };
+    case CHANGE_LOGIN:
+      return {
+        ...state,
+        login: action.email
       };
     case CHANGE_NAME:
       return {
         ...state,
-        name: state.input,
-        input: '',
-        visible: !state.visible
+        name: action.name
       };
     default:
       return state;

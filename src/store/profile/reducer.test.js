@@ -1,4 +1,4 @@
-import { TOGGLE_PROFILE, INPUT_NAME, CHANGE_NAME } from './actions';
+import { TOGGLE_VISIBLE, TOGGLE_AUTH, CHANGE_LOGIN, CHANGE_NAME } from './actions';
 import { profileReducer } from './reducer';
 
 describe('profileReducer', () => {
@@ -9,34 +9,45 @@ describe('profileReducer', () => {
   it('При старте Reducer возвращает значение по умолчанию', () => {
     expect(profileReducer(undefined, {})).toEqual({
       visible: false,
-      input: '',
+      auth: false,
+      login: 'email',
       name: 'user'
     });
   });
 
-  it('При Action = TOGGLE_PROFILE', () => {
-    expect(profileReducer(undefined, { type: TOGGLE_PROFILE })).toEqual({
+  it('При Action = TOGGLE_VISIBLE', () => {
+    expect(profileReducer(undefined, { type: TOGGLE_VISIBLE })).toEqual({
       visible: true,
-      input: '',
+      auth: false,
+      login: 'email',
       name: 'user'
     });
   });
 
-  it('При Action = INPUT_NAME', () => {
-    expect(profileReducer(undefined, { type: INPUT_NAME, value: 'Петя' })).toEqual({
+  it('При Action = TOGGLE_AUTH', () => {
+    expect(profileReducer(undefined, { type: TOGGLE_AUTH, status: true })).toEqual({
       visible: false,
-      input: 'Петя',
+      auth: true,
+      login: 'email',
+      name: 'user'
+    });
+  });
+
+  it('При Action = CHANGE_LOGIN', () => {
+    expect(profileReducer(undefined, { type: CHANGE_LOGIN, email: 'test@test.test' })).toEqual({
+      visible: false,
+      auth: false,
+      login: 'test@test.test',
       name: 'user'
     });
   });
 
   it('При Action = CHANGE_NAME', () => {
-    expect(
-      profileReducer({ visible: true, input: 'Петя', name: 'user' }, { type: CHANGE_NAME })
-    ).toEqual({
+    expect(profileReducer(undefined, { type: CHANGE_NAME, name: 'Вася' })).toEqual({
       visible: false,
-      input: '',
-      name: 'Петя'
+      auth: false,
+      login: 'email',
+      name: 'Вася'
     });
   });
 });

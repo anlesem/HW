@@ -1,31 +1,38 @@
-import { useRef, useEffect } from 'react';
-import { useSelector, useDispatch, shallowEqual } from 'react-redux';
+import { useEffect, useRef, useState } from 'react';
+import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 
-import { toggleVisible, inputName, changeName } from '../../store/profile/actions';
-import { getProfileVisible, getProfileInput, getProfileName } from '../../store/profile/selectors';
+import { logOut } from '../../services/firebase';
+
+import {
+  getProfileName,
+  getProfileLogin,
+  getProfileAuth,
+  getProfileVisible
+} from '../../store/profile/selectors';
+import { changeNameThunk, toggleVisible } from '../../store/profile/actions';
 
 import style from './Profile.module.scss';
 
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import SendIcon from '@mui/icons-material/Send';
+import { ProfileButtons } from '../../components/ProfileButtons/ProfileButtons';
+import { ProfileForm } from '../../components/ProfileForm/ProfileForm';
 
 export const Profile = () => {
   const visible = useSelector(getProfileVisible, shallowEqual);
-  const input = useSelector(getProfileInput, shallowEqual);
-  const name = useSelector(getProfileName, shallowEqual);
+  const auth = useSelector(getProfileAuth);
+  const name = useSelector(getProfileName);
+  const login = useSelector(getProfileLogin);
+  const [input, setInput] = useState('');
   const dispatch = useDispatch();
   const focusForm = useRef(null);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    dispatch(changeName);
+  const handleClick = async () => {
+    logOut();
   };
 
-  const handleInput = (text) => {
-    dispatch(inputName(text));
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    dispatch(changeNameThunk(input));
+    setInput('');
   };
 
   const handleKeyDown = (event) => {
@@ -35,6 +42,10 @@ export const Profile = () => {
     }
   };
 
+  const handleCheck = () => {
+    dispatch(toggleVisible);
+  };
+
   useEffect(() => {
     if (focusForm.current) focusForm.current.focus();
   });
@@ -42,31 +53,20 @@ export const Profile = () => {
   return (
     <div className={style.main}>
       <h1 className={style.head}>{name}</h1>
-      <FormControlLabel
-        control={<Checkbox checked={visible} inputProps={{ 'data-testid': 'profile-check' }} />}
-        label="Авторизоваться"
-        data-testid={'profile-box'}
-        onChange={() => dispatch(toggleVisible)}
-      />
-      {visible && (
-        <form className={style.form} onSubmit={(event) => handleSubmit(event)}>
-          <TextField
-            id="outlined-basic"
-            variant="outlined"
-            name="login"
-            label="Логин"
-            value={input}
-            onChange={(event) => handleInput(event.target.value)}
-            onKeyDown={(event) => handleKeyDown(event)}
-            required
-            inputRef={focusForm}
-            inputProps={{ 'data-testid': 'profile-form-input' }}
-            className={style.textField}
-          />
-          <Button variant="outlined" type="submit" data-testid={'profile-form-button'}>
-            <SendIcon />
-          </Button>
-        </form>
+      <p className={style.text}>{login}</p>
+      {auth ? (
+        <ProfileForm
+          visible={visible}
+          input={input}
+          setInput={setInput}
+          handleClick={handleClick}
+          handleSubmit={handleSubmit}
+          handleKeyDown={handleKeyDown}
+          handleCheck={handleCheck}
+          focusForm={focusForm}
+        />
+      ) : (
+        <ProfileButtons />
       )}
     </div>
   );

@@ -1,39 +1,40 @@
-import { ADD_MESSAGE, INIT_MESSAGE_LIST, INIT_TEMP_INPUT, CHANGE_TEMP_INPUT } from './actions';
+import {
+  SET_MESSAGE_LIST,
+  INIT_MESSAGE,
+  ADD_MESSAGE,
+  CHANGE_MESSAGE,
+  DELETE_MESSAGE,
+  RESET_MESSAGE_LIST,
+  INIT_COUNTER_MSG,
+  CHANGE_COUNTER_MSG,
+  RESET_COUNTER_MSG,
+  INIT_TEMP_INPUT,
+  CHANGE_TEMP_INPUT,
+  RESET_TEMP_INPUT
+} from './actions';
 
 const initialState = {
-  messageList: {
-    chat0: [
-      {
-        id: '0',
-        author: 'BOT',
-        text: 'Выберите чат для отображения сообщений'
-      }
-    ],
-    chat1: [
-      {
-        id: '1',
-        author: 'BOT',
-        text: 'Добро пожаловать в чат №1'
-      }
-    ]
-  },
-  tempInput: ['', '']
+  messageList: {},
+  counterMSG: [''],
+  tempInput: ['']
 };
 
-export const messagesReducer = (state = initialState, Action) => {
-  switch (Action.type) {
-    case INIT_MESSAGE_LIST:
+export const messagesReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case SET_MESSAGE_LIST:
       return {
         ...state,
         messageList: {
           ...state.messageList,
-          [`chat${Action.chatId}`]: [
-            {
-              id: '1',
-              author: 'BOT',
-              text: `Добро пожаловать в чат №${Action.chatId}`
-            }
-          ]
+          [action.chatId]: action.payload
+        }
+      };
+    case INIT_MESSAGE:
+      return {
+        ...state,
+        messageList: {
+          ...state.messageList,
+          [action.chatId]: [action.payload]
         }
       };
     case ADD_MESSAGE:
@@ -41,15 +42,50 @@ export const messagesReducer = (state = initialState, Action) => {
         ...state,
         messageList: {
           ...state.messageList,
-          [`chat${Action.chatId}`]: [
-            ...state.messageList[`chat${Action.chatId}`],
-            {
-              id: Action.id,
-              author: Action.author,
-              text: Action.text
-            }
-          ]
+          [action.chatId]: [...state.messageList[action.chatId], action.payload]
         }
+      };
+    case CHANGE_MESSAGE:
+      return {
+        ...state,
+        messageList: {
+          ...state.messageList,
+          [action.chatId]: state.messageList[action.chatId].map((item) =>
+            item.id === action.id ? { ...item, text: action.value } : item
+          )
+        }
+      };
+    case DELETE_MESSAGE:
+      return {
+        ...state,
+        messageList: {
+          ...state.messageList,
+          [action.chatId]: action.payload
+        }
+      };
+    case RESET_MESSAGE_LIST:
+      return {
+        ...state,
+        messageList: {}
+      };
+    case INIT_COUNTER_MSG:
+      return {
+        ...state,
+        counterMSG: [...state.counterMSG, action.counterMSG]
+      };
+    case CHANGE_COUNTER_MSG:
+      return {
+        ...state,
+        counterMSG: [
+          ...state.counterMSG.slice(0, action.id),
+          action.counter,
+          ...state.counterMSG.slice(action.id + 1)
+        ]
+      };
+    case RESET_COUNTER_MSG:
+      return {
+        ...state,
+        counterMSG: ['']
       };
     case INIT_TEMP_INPUT:
       return {
@@ -60,10 +96,15 @@ export const messagesReducer = (state = initialState, Action) => {
       return {
         ...state,
         tempInput: [
-          ...state.tempInput.slice(0, Action.id),
-          Action.value,
-          ...state.tempInput.slice(Action.id + 1)
+          ...state.tempInput.slice(0, action.id),
+          action.value,
+          ...state.tempInput.slice(action.id + 1)
         ]
+      };
+    case RESET_TEMP_INPUT:
+      return {
+        ...state,
+        tempInput: ['']
       };
     default:
       return state;

@@ -2,8 +2,12 @@ import { useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { getChatList, getChatCounter } from '../../store/chats/selectors';
-import { addChat, renameChat, deleteChat } from '../../store/chats/actions';
-import { initMessageList, initTempInput } from '../../store/messages/actions';
+import { addChatThunk, renameChatThunk, deleteChatThunk } from '../../store/chats/actions';
+import {
+  changeInitMessageThunk,
+  deleteMessagesListThunk,
+  initMessageThunk
+} from '../../store/messages/actions';
 
 import style from './ChatContain.module.scss';
 
@@ -30,22 +34,23 @@ export const ChatContain = () => {
   };
 
   const handleAdd = () => {
-    dispatch(addChat);
-    dispatch(initMessageList(counter + 1));
-    dispatch(initTempInput);
+    dispatch(addChatThunk(counter + 1));
+    dispatch(initMessageThunk(counter + 1));
     scrollChats.current.scrollTop =
       scrollChats.current.scrollHeight - scrollChats.current.clientHeight;
   };
 
   const handleDelete = (checked) => {
     checked.forEach((id) => {
-      dispatch(deleteChat(id));
+      dispatch(deleteChatThunk(id));
+      dispatch(deleteMessagesListThunk(id));
     });
     setChecked([0]);
   };
 
   const changeNameChat = (text) => {
-    dispatch(renameChat(checked[1], text));
+    dispatch(renameChatThunk(checked[1], text));
+    dispatch(changeInitMessageThunk(checked[1], text));
     setChecked([0]);
   };
 
